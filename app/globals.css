@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f1e8;
+  --foreground: #1e1713;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: rgba(199, 100, 52, 0.22);
+  }
+}
+
+.theme-shell {
+  background-image:
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+  background-size: 100% 1px, 1px 100%;
+  background-position: top left, top left;
+  background-repeat: no-repeat;
+}
+
+.theme-family-high-agency {
+  background-image:
+    radial-gradient(circle at top right, rgba(199, 100, 52, 0.14), transparent 24%),
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+}
+
+.theme-family-editorial-typography {
+  background-image:
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+}
+
+.theme-family-grid-product {
+  background-image:
+    radial-gradient(circle at top left, rgba(95, 124, 255, 0.1), transparent 28%),
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+}
+
+.theme-family-immersive-premium {
+  background-image:
+    radial-gradient(circle at top, rgba(114, 162, 255, 0.16), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(68, 241, 255, 0.1), transparent 20%),
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+}
+
+.theme-family-tactile-organic {
+  background-image:
+    radial-gradient(circle at top left, rgba(255, 143, 114, 0.18), transparent 24%),
+    radial-gradient(circle at top right, rgba(122, 198, 255, 0.14), transparent 28%),
+    linear-gradient(var(--theme-grid), var(--theme-grid)),
+    linear-gradient(90deg, var(--theme-grid), var(--theme-grid));
+}
+
+.theme-family-experimental-loud {
+  background-image:
+    linear-gradient(rgba(16, 16, 16, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 16, 16, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at top right, rgba(255, 95, 45, 0.12), transparent 24%);
+  background-size: 28px 28px, 28px 28px, auto;
+}
