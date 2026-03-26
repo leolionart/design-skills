@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:codex-skills": "bash scripts/sync-codex-skills.sh"
+    "sync:codex-skills": "bash scripts/sync-codex-skills.sh",
+    "check:style-skill-sync": "node scripts/check-style-skill-sync.js"
   },
   "dependencies": {
     "@cursorify/react": "^0.0.43",
