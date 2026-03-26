@@ -6,6 +6,7 @@ import { BauhausLanding } from "@/components/landing/families/bauhaus";
 import { BentoLanding } from "@/components/landing/families/bento";
 import { CyberpunkLanding } from "@/components/landing/families/cyberpunk";
 import { MotionLanding } from "@/components/landing/families/motion";
+import { Product3DLanding } from "@/components/landing/families/product-3d";
 import { familyRenderers } from "@/components/landing/families/registry";
 import { UiLayoutsHero } from "@/components/landing/ui-layouts-hero";
 import { CopyPromptButton } from "@/components/shell/copy-prompt-button";
@@ -22,6 +23,7 @@ const specialRenderers: Record<string, typeof familyRenderers[keyof typeof famil
   "bento-grid": BentoLanding,
   "cyberpunk-neon": CyberpunkLanding,
   "motion-led-storytelling": MotionLanding,
+  "immersive-3d-product": Product3DLanding,
 };
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
