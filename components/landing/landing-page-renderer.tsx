@@ -3,7 +3,9 @@ import {
   DemoStyleSidebarDrawer,
 } from "@/components/landing/demo-style-sidebar";
 import { BauhausLanding } from "@/components/landing/families/bauhaus";
+import { BentoLanding } from "@/components/landing/families/bento";
 import { familyRenderers } from "@/components/landing/families/registry";
+import { UiLayoutsHero } from "@/components/landing/ui-layouts-hero";
 import { CopyPromptButton } from "@/components/shell/copy-prompt-button";
 import { StyleIntelligencePanel } from "@/components/shell/style-intelligence-panel";
 import { Button } from "@/components/ui/button";
@@ -15,6 +17,7 @@ import { demoStyles, type ThemeDefinition } from "@/lib/themes";
 // Special renderers for specific styles that need unique treatment
 const specialRenderers: Record<string, typeof familyRenderers[keyof typeof familyRenderers]> = {
   "bauhaus-geometric": BauhausLanding,
+  "bento-grid": BentoLanding,
 };
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
@@ -60,6 +63,7 @@ export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
         </div>
 
         <div className="min-w-0">
+          <UiLayoutsHero theme={theme} />
           <Renderer theme={theme} />
           <StyleIntelligencePanel theme={theme} />
 
