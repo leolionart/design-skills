@@ -7,6 +7,8 @@ import { BentoLanding } from "@/components/landing/families/bento";
 import { CyberpunkLanding } from "@/components/landing/families/cyberpunk";
 import { MotionLanding } from "@/components/landing/families/motion";
 import { Product3DLanding } from "@/components/landing/families/product-3d";
+import { SketchLanding } from "@/components/landing/families/sketch";
+import { VaporwaveLanding } from "@/components/landing/families/vaporwave";
 import { Y2KLanding } from "@/components/landing/families/y2k";
 import { familyRenderers } from "@/components/landing/families/registry";
 import { UiLayoutsHero } from "@/components/landing/ui-layouts-hero";
@@ -26,6 +28,8 @@ const specialRenderers: Record<string, typeof familyRenderers[keyof typeof famil
   "motion-led-storytelling": MotionLanding,
   "immersive-3d-product": Product3DLanding,
   "y2k-retro-futurism": Y2KLanding,
+  "vaporwave-dreamscape": VaporwaveLanding,
+  "sketch-wireframe": SketchLanding,
 };
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
