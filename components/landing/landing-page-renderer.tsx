@@ -23,14 +23,15 @@ import { demoStyles, type ThemeDefinition } from "@/lib/themes";
 
 // Special renderers for specific styles that need unique treatment
 const specialRenderers: Record<string, typeof familyRenderers[keyof typeof familyRenderers]> = {
-  "bauhaus-geometric": BauhausLanding,
+  "catholic-mondrianism": BauhausLanding,
   "bento-grid": BentoLanding,
-  "cyberpunk-neon": CyberpunkLanding,
+  cyberpunk: CyberpunkLanding,
+  kinetic: MotionLanding,
   "motion-led-storytelling": MotionLanding,
   "immersive-3d-product": Product3DLanding,
   "y2k-retro-futurism": Y2KLanding,
-  "vaporwave-dreamscape": VaporwaveLanding,
-  "sketch-wireframe": SketchLanding,
+  vaporwave: VaporwaveLanding,
+  sketch: SketchLanding,
   "anti-design": AntiDesignLanding,
 };
 
@@ -98,7 +99,7 @@ export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
                   </div>
                   <div className="flex flex-wrap gap-3 lg:justify-end">
                     <Button href="/">Choose another style</Button>
-                    <Button href="/styles/default-high-agency" variant="secondary">
+                    <Button href="/styles/asymmetry-grid-layouts" variant="secondary">
                       Reset to flagship
                     </Button>
                   </div>

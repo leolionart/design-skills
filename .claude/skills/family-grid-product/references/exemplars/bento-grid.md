@@ -10,8 +10,8 @@ Use varied tile sizes, modular grouping, and scan-friendly density to show many 
 - motion tolerance is low to medium
 
 ## Distinguishing signals
-- denser and more tile-led than `professional-corporate`
-- more modular and less operator-centric than `terminal-interface`
+- denser and more tile-led than `bento-grid`
+- more modular and less operator-centric than `terminal`
 - uses tile scale and composition as the main storytelling device
 - can feel more product-demo-like than a traditional landing page
 
@@ -40,6 +40,6 @@ Use varied tile sizes, modular grouping, and scan-friendly density to show many 
 - over-polished surfaces that erase the modular logic
 
 ## Review and conversion cues
-- If the page feels cleaner and more executive than tile-driven, it is drifting toward `professional-corporate`.
-- If the page shifts to console hierarchy and operator language, it is drifting toward `terminal-interface`.
+- If the page feels cleaner and more executive than tile-driven, it is drifting toward `bento-grid`.
+- If the page shifts to console hierarchy and operator language, it is drifting toward `terminal`.
 - To convert from linear product pages, introduce tile hierarchy before adding more content.

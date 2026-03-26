@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-03-26T22:23:45.246Z",
+  "source": "https://naai.studio/api/design-styles",
+  "summary": {
+    "total_remote": 73,
+    "total_local_before": 73,
+    "total_local_after": 73,
+    "added_count": 0,
+    "removed_count": 0,
+    "kept_count": 73,
+    "docs_rewritten_count": 0
+  },
+  "by_family": {
+    "high-agency": 3,
+    "editorial-typography": 12,
+    "grid-product": 22,
+    "immersive-premium": 8,
+    "tactile-organic": 10,
+    "experimental-loud": 18
+  },
+  "reference_only_slugs": [
+    "bauhaus-mondrian",
+    "iridescent-holographic-chrome",
+    "meaningful-minimalism",
+    "cute-alism-kawaii-brutalism",
+    "brutalist-editorial-zine",
+    "inclusive-accessibility-first"
+  ],
+  "added_slugs": [],
+  "removed_slugs": [],
+  "legacy_slug_replacements": {
+    "default-high-agency": "asymmetry-grid-layouts",
+    "academia-classical": "academia",
+    "cyberpunk-neon": "cyberpunk",
+    "maximalism-collage": "maximalist",
+    "professional-corporate": "bento-grid",
+    "terminal-interface": "terminal",
+    "web3-orange-ledger": "cyberpunk",
+    "vaporwave-dreamscape": "vaporwave",
+    "botanical-editorial": "botanical",
+    "sketch-wireframe": "sketch",
+    "bauhaus-geometric": "swiss-minimalist",
+    "art-deco-luxe": "art-deco",
+    "minimalist-editorial": "editorial-minimalism",
+    "premium-polish": "premium-monochrome",
+    "structured-technical": "terminal"
+  }
+}

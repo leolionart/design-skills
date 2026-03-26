@@ -11,8 +11,8 @@ Use neutral color, fine borders, and spacious typographic precision to create a 
 
 ## Distinguishing signals
 - colder and more neutral than `editorial-minimalism`
-- less archival and historical than `academia-classical`
-- less ornamental and glamorous than `art-deco-luxe`
+- less archival and historical than `academia`
+- less ornamental and glamorous than `art-deco`
 - depends on tone, spacing, and finish rather than expressive type or color
 
 ## Layout directives
@@ -34,12 +34,12 @@ Use neutral color, fine borders, and spacious typographic precision to create a 
 - imagery should feel art-directed and polished, not casual
 
 ## Avoid
-- warm archival mood that turns it into `academia-classical`
+- warm archival mood that turns it into `academia`
 - too much editorial roughness or visible publication tension
 - decorative gradients or playful color
 - dense product explanation that weakens the luxury tone
 
 ## Review and conversion cues
 - If it feels more like a manifesto or publication, it is drifting toward `editorial-minimalism`.
-- If geometry and ornament become explicit luxury cues, it is drifting toward `art-deco-luxe`.
+- If geometry and ornament become explicit luxury cues, it is drifting toward `art-deco`.
 - To convert from richer or louder premium pages, reduce color first, then tighten spacing and surface restraint.

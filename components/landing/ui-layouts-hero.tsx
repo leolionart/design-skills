@@ -84,37 +84,21 @@ const heroPatterns: Record<HeroPatternId, HeroPattern> = {
 };
 
 function resolvePatternId(theme: ThemeDefinition): HeroPatternId {
+  if (theme.family === "high-agency") return "hero-digital-success";
+  if (theme.family === "editorial-typography") return "hero-financial";
+  if (theme.family === "immersive-premium") return "hero-ai-infrastructure";
+  if (theme.family === "tactile-organic") return "hero-social-app";
+  if (theme.family === "experimental-loud") return "hero-social-app";
+
   const explicitMap: Partial<Record<string, HeroPatternId>> = {
-    "default-high-agency": "hero-digital-success",
-    "glassmorphism-mature": "hero-ai-infrastructure",
-    "neo-brutalism": "hero-social-app",
-    "editorial-minimalism": "hero-financial",
     "bento-grid": "hero-ai-value-proposition",
-    "dark-glow-aurora": "hero-ai-infrastructure",
-    "claymorphism-soft-3d": "hero-social-app",
+    terminal: "hero-ai-infrastructure",
     "immersive-3d-product": "hero-digital-success",
-    "y2k-retro-futurism": "hero-social-app",
-    "anti-design": "hero-social-app",
-    "typography-first": "hero-financial",
-    "organic-mesh-gradients": "hero-social-app",
-    "premium-monochrome": "hero-financial",
     "motion-led-storytelling": "hero-digital-success",
-    "iridescent-holographic-chrome": "hero-social-app",
-    "meaningful-minimalism": "hero-financial",
-    "cute-alism-kawaii-brutalism": "hero-social-app",
-    "brutalist-editorial-zine": "hero-social-app",
-    "professional-corporate": "hero-financial",
-    "terminal-interface": "hero-ai-infrastructure",
-    "web3-orange-ledger": "hero-ai-infrastructure",
-    "vaporwave-dreamscape": "hero-social-app",
-    "botanical-editorial": "hero-social-app",
-    "sketch-wireframe": "hero-ai-ecommerce",
-    "bauhaus-geometric": "hero-ai-value-proposition",
-    "academia-classical": "hero-financial",
-    "cyberpunk-neon": "hero-ai-infrastructure",
-    "maximalism-collage": "hero-ai-ecommerce",
-    "art-deco-luxe": "hero-financial",
-    "ai-ecommerce": "hero-ai-ecommerce",
+    sketch: "hero-ai-ecommerce",
+    maximalist: "hero-ai-ecommerce",
+    "asymmetry-grid-layouts": "hero-digital-success",
+    "catholic-mondrianism": "hero-financial",
   };
 
   return explicitMap[theme.slug] ?? "hero-ai-value-proposition";

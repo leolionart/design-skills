@@ -35,7 +35,7 @@ export function VaporwaveLanding({ theme }: { theme: ThemeDefinition }) {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="/">Back to style catalog</Button>
-                <Button href="/styles/cyberpunk-neon" variant="secondary">
+                <Button href="/styles/cyberpunk" variant="secondary">
                   Compare cyberpunk
                 </Button>
               </div>
@@ -81,4 +81,3 @@ export function VaporwaveLanding({ theme }: { theme: ThemeDefinition }) {
     </>
   );
 }
-

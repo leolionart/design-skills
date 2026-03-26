@@ -10,9 +10,9 @@ Use disciplined type, sharp spacing rhythm, and refined restraint to make the in
 - motion tolerance is low
 
 ## Distinguishing signals
-- sharper and more publication-like than `meaningful-minimalism`
-- warmer and less neutral than `premium-monochrome`
-- less headline-dominant than `typography-first`
+- more publication-like and structurally editorial than `premium-monochrome`
+- less archival and institutional than `academia-classical`
+- less ornamental and glamour-forward than `art-deco-luxe`
 - relies on spacing rhythm and fine structure more than spectacle
 
 ## Layout directives
@@ -37,9 +37,9 @@ Use disciplined type, sharp spacing rhythm, and refined restraint to make the in
 - loud accents that overpower the typography
 - too many boxed sections or pills
 - luxury cues without spacing discipline
-- oversized expressive display that turns the page into `typography-first`
+- heavy ornamentation that turns the page into `art-deco-luxe`
 
 ## Review and conversion cues
-- If the page feels serene but not structurally editorial, it is drifting toward `meaningful-minimalism`.
 - If the page feels luxury-neutral and colder, it is drifting toward `premium-monochrome`.
+- If the page feels archival and institution-like, it is drifting toward `academia-classical`.
 - To convert from louder marketing pages, remove decorative noise before refining type and spacing.

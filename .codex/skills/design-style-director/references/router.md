@@ -20,7 +20,6 @@ Signals:
 - luxury
 - quiet
 - refined
-- typography-first
 - whitespace
 
 ### grid-product
@@ -72,8 +71,8 @@ Signals:
 
 ## Pick exemplar styles after family
 - high-agency -> `default-high-agency`
-- editorial-typography -> `editorial-minimalism`, `typography-first`, `premium-monochrome`, `meaningful-minimalism`, `academia-classical`, `art-deco-luxe`
-- grid-product -> `bento-grid`, `clean-saas-gradient`, `inclusive-accessibility-first`, `professional-corporate`, `terminal-interface`, `bauhaus-geometric`
+- editorial-typography -> `editorial-minimalism`, `premium-monochrome`, `academia-classical`, `art-deco-luxe`
+- grid-product -> `bento-grid`, `professional-corporate`, `terminal-interface`, `bauhaus-geometric`
 - immersive-premium -> `glassmorphism-mature`, `dark-glow-aurora`, `immersive-3d-product`, `motion-led-storytelling`, `iridescent-holographic-chrome`, `cyberpunk-neon`, `web3-orange-ledger`
 - tactile-organic -> `claymorphism-soft-3d`, `organic-mesh-gradients`, `botanical-editorial`
 - experimental-loud -> `neo-brutalism`, `y2k-retro-futurism`, `anti-design`, `cute-alism-kawaii-brutalism`, `brutalist-editorial-zine`, `maximalism-collage`, `vaporwave-dreamscape`, `sketch-wireframe`
@@ -81,14 +80,10 @@ Signals:
 ## Exemplar chooser cues
 - `default-high-agency` -> flagship, founder-led, asymmetric, anti-generic, strong CTA timing, bold but still strategic
 - `editorial-minimalism` -> refined editorial, manifesto, Swiss-inspired structure, quiet but visibly composed
-- `typography-first` -> oversized headline, type-led identity, strong voice, text as the hero
 - `premium-monochrome` -> quiet luxury, boutique service, monochrome restraint, expensive neutrality
-- `meaningful-minimalism` -> calm, serene, zen, understated premium, wellness, mature founder brand
 - `academia-classical` -> scholarly, institutional, archival warmth, brass detail, literary prestige
 - `art-deco-luxe` -> geometric luxury, hospitality glamour, black-gold elegance, premium invitation energy
 - `bento-grid` -> modular tile storytelling, many benefits visible fast, dense but controlled scanning
-- `clean-saas-gradient` -> polished startup clarity, practical SaaS, conversion-friendly, modern but safe
-- `inclusive-accessibility-first` -> readable-first, civic, healthcare, education, broad-audience trust
 - `professional-corporate` -> enterprise trust, executive clarity, structured B2B polish, serious operational tone
 - `terminal-interface` -> devtools, infra, console logic, monospace hierarchy, command-line mood
 - `bauhaus-geometric` -> modernist geometry, primary-color discipline, graphic modularity, design-led clarity
@@ -121,12 +116,9 @@ Signals:
 - If the brief says playful + friendly + soft, prefer tactile-organic.
 - If the brief says earthy, restorative, or nature-led premium, prefer `botanical-editorial` over other tactile directions.
 - If the brief says launch energy with hierarchy rather than graphic disruption, prefer `default-high-agency` over `neo-brutalism`.
-- If the brief says type should be the main spectacle, prefer `typography-first` over `editorial-minimalism`.
-- If the brief says calm premium rather than luxury premium, prefer `meaningful-minimalism` over `premium-monochrome`.
 - If the brief says neutral expensive restraint rather than editorial warmth, prefer `premium-monochrome` over `editorial-minimalism`.
-- If the brief says executive trust and business clarity, prefer `professional-corporate` over `clean-saas-gradient`.
-- If the brief says trust through readability, prefer `inclusive-accessibility-first` over `clean-saas-gradient`.
-- If the brief says many benefits must scan at once, prefer `bento-grid` over `clean-saas-gradient`.
+- If the brief says executive trust and business clarity, prefer `professional-corporate` over `bento-grid`.
+- If the brief says many benefits must scan at once, prefer `bento-grid` over `professional-corporate`.
 - If the brief says strict geometric modularity, prefer `bauhaus-geometric` over `bento-grid`.
 - If the brief says technical operator mood, prefer `terminal-interface` over `professional-corporate`.
 - If the brief says layered readable glass UI, prefer `glassmorphism-mature` over `dark-glow-aurora`.

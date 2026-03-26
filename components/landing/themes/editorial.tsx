@@ -28,15 +28,15 @@ function MinimalistVariant({ theme }: { theme: ThemeDefinition }) {
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--theme-muted)]">
                 {productName} becomes an editorial statement here: restrained, spacious and built to let typography carry the emotional weight.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/" variant="secondary">
-                  Return to gallery
-                </Button>
-                <Button href="/styles/professional-corporate" variant="ghost">
-                  Compare professional
-                </Button>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button href="/" variant="secondary">
+                    Return to gallery
+                  </Button>
+                  <Button href="/styles/swiss-minimalist" variant="ghost">
+                    Compare swiss
+                  </Button>
+                </div>
               </div>
-            </div>
           </div>
         </Container>
       </section>
@@ -180,8 +180,8 @@ function AcademiaVariant({ theme }: { theme: ThemeDefinition }) {
           <div className="flex justify-center gap-6 mb-16 font-serif">
              <a href="/" className="underline underline-offset-4 decoration-[var(--theme-muted)] hover:text-[var(--theme-accent)] transition-colors">Index</a>
              <span className="text-[var(--theme-muted)]">•</span>
-             <a href="/styles/professional-corporate" className="underline underline-offset-4 decoration-[var(--theme-muted)] hover:text-[var(--theme-accent)] transition-colors">Compare</a>
-          </div>
+             <a href="/styles/swiss-minimalist" className="underline underline-offset-4 decoration-[var(--theme-muted)] hover:text-[var(--theme-accent)] transition-colors">Compare</a>
+           </div>
 
           <div className="space-y-12">
             <h2 className="text-center font-[family-name:var(--theme-font-display)] text-2xl uppercase tracking-widest border-b border-[var(--theme-border)] pb-4 mb-8">
@@ -224,7 +224,7 @@ export function EditorialLanding({ theme }: { theme: ThemeDefinition }) {
     return <MonochromeVariant theme={theme} />;
   }
   
-  if (theme.slug === "academia-classical") {
+  if (theme.slug === "academia") {
     return <AcademiaVariant theme={theme} />;
   }
 

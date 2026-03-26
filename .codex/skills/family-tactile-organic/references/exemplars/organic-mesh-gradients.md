@@ -11,7 +11,7 @@ Use ambient color fields, blobs, and soft diffusion to create a current, gentle,
 
 ## Distinguishing signals
 - more atmospheric than `claymorphism-soft-3d`
-- softer and more ambient than `clean-saas-gradient`
+- softer and more ambient than `professional-corporate`
 - less punchy and character-led than `cute-alism-kawaii-brutalism`
 - uses color field and light diffusion more than material form
 
@@ -41,5 +41,5 @@ Use ambient color fields, blobs, and soft diffusion to create a current, gentle,
 
 ## Review and conversion cues
 - If the page feels molded, puffy, and touchable, it is drifting toward `claymorphism-soft-3d`.
-- If the direction becomes more polished SaaS than soft atmosphere, it is drifting toward `clean-saas-gradient`.
+- If the direction becomes more trust-first and enterprise-polished than soft atmosphere, it is drifting toward `professional-corporate`.
 - To convert from colder product pages, introduce one ambient field first before adding more organic treatment.

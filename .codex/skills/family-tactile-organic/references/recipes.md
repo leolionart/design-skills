@@ -8,7 +8,7 @@
 - Choose `claymorphism-soft-3d` over `organic-mesh-gradients` when the interface should feel materially soft and touchable rather than mostly atmospheric.
 - Choose `organic-mesh-gradients` over `claymorphism-soft-3d` when ambient color fields matter more than cushioned surfaces.
 - Choose `claymorphism-soft-3d` over `cute-alism-kawaii-brutalism` when the page should feel inviting and soft rather than punchy and contrast-heavy.
-- Choose `organic-mesh-gradients` over `clean-saas-gradient` when brand softness matters more than conversion-polish clarity.
+- Choose `organic-mesh-gradients` over `professional-corporate` when brand softness matters more than enterprise clarity.
 
 ## Safe blends
 - `claymorphism-soft-3d` + grid-product for approachable product flows

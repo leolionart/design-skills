@@ -35,8 +35,8 @@ export function AntiDesignLanding({ theme }: { theme: ThemeDefinition }) {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="/">Back to style catalog</Button>
-                <Button href="/styles/brutalist-editorial-zine" variant="secondary">
-                  Compare zine
+                <Button href="/styles/maximalist" variant="secondary">
+                  Compare maximalist
                 </Button>
               </div>
             </div>
@@ -80,4 +80,3 @@ export function AntiDesignLanding({ theme }: { theme: ThemeDefinition }) {
     </>
   );
 }
-

@@ -1,3 +1,5 @@
+import { demoStyles, getStyleBySlug } from "@/lib/themes";
+
 export type StyleComparison = {
   slug: string;
   reason: string;
@@ -16,14 +18,14 @@ const fallbackStyleIntelligence: StyleIntelligence = {
 };
 
 export const styleIntelligence: Record<string, StyleIntelligence> = {
-  "default-high-agency": {
+  "asymmetry-grid-layouts": {
     thesis:
       "A flagship launch direction that wins by breaking centered SaaS rhythm and keeping the page in motion through asymmetry.",
     grammar: ["off-axis hero", "hierarchy swings", "dimensional proof blocks"],
     compare: [
       {
-        slug: "professional-corporate",
-        reason: "Choose this when the brand needs founder energy; choose professional corporate when conversion clarity must dominate.",
+        slug: "bento-grid",
+        reason: "Choose this when the brand needs founder energy and off-axis momentum; choose bento grid when feature scanning and modular clarity should dominate.",
       },
     ],
   },
@@ -66,8 +68,8 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["variable tiles", "scan-first density", "modular storytelling"],
     compare: [
       {
-        slug: "professional-corporate",
-        reason: "Bento uses layout rhythm as the differentiator; professional corporate keeps a safer, more standard marketing cadence.",
+        slug: "swiss-minimalist",
+        reason: "Bento uses varied tile rhythm and modular density; Swiss minimalist keeps structure stricter and typographically restrained.",
       },
     ],
   },
@@ -77,7 +79,7 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["dark canvas", "aurora fields", "glow-edged surfaces"],
     compare: [
       {
-        slug: "cyberpunk-neon",
+        slug: "cyberpunk",
         reason: "Aurora is premium and controlled; cyberpunk is sharper, louder, and more electrically aggressive.",
       },
     ],
@@ -110,7 +112,7 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["glossy controls", "chrome accents", "techno nostalgia"],
     compare: [
       {
-        slug: "vaporwave-dreamscape",
+        slug: "vaporwave",
         reason: "Y2K feels shinier and more interface-like; vaporwave is softer, dreamier, and more sunset-synthetic.",
       },
     ],
@@ -337,6 +339,55 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
   },
 };
 
+for (const slug of Object.keys(styleIntelligence)) {
+  if (!getStyleBySlug(slug)) {
+    delete styleIntelligence[slug];
+  }
+}
+
+function toGrammarTokens(styleSlug: string) {
+  const style = getStyleBySlug(styleSlug);
+  if (!style) return fallbackStyleIntelligence.grammar;
+
+  return [
+    style.primaryLanguage,
+    ...style.supportingTreatments,
+    style.imageryMode,
+  ]
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
+function toCompare(styleSlug: string): StyleComparison[] {
+  const style = getStyleBySlug(styleSlug);
+  if (!style) return [];
+
+  const sibling = demoStyles.find(
+    (candidate) => candidate.family === style.family && candidate.slug !== style.slug,
+  );
+
+  if (!sibling) return [];
+
+  return [
+    {
+      slug: sibling.slug,
+      reason: `${style.modeLabel} prioritizes "${style.primaryLanguage.toLowerCase()}"; ${sibling.modeLabel} gives a different read within the same family.`,
+    },
+  ];
+}
+
+function buildDerivedIntelligence(slug: string): StyleIntelligence {
+  const style = getStyleBySlug(slug);
+  if (!style) return fallbackStyleIntelligence;
+
+  return {
+    thesis: style.summary || fallbackStyleIntelligence.thesis,
+    grammar: toGrammarTokens(slug),
+    compare: toCompare(slug),
+  };
+}
+
 export function getStyleIntelligence(slug: string): StyleIntelligence {
-  return styleIntelligence[slug] ?? fallbackStyleIntelligence;
+  return styleIntelligence[slug] ?? buildDerivedIntelligence(slug);
 }

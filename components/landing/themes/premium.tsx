@@ -25,7 +25,7 @@ export function PremiumLanding({ theme }: { theme: ThemeDefinition }) {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Button href="/">Back to gallery</Button>
-                  <Button href="/styles/default-high-agency" variant="secondary">
+                  <Button href="/styles/asymmetry-grid-layouts" variant="secondary">
                     Compare flagship mode
                   </Button>
                 </div>

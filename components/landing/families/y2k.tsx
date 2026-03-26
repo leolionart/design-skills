@@ -47,8 +47,8 @@ export function Y2KLanding({ theme }: { theme: ThemeDefinition }) {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="/">Back to style catalog</Button>
-                <Button href="/styles/iridescent-holographic-chrome" variant="secondary">
-                  Compare holographic
+                <Button href="/styles/vaporwave" variant="secondary">
+                  Compare vaporwave
                 </Button>
               </div>
             </div>
@@ -95,4 +95,3 @@ export function Y2KLanding({ theme }: { theme: ThemeDefinition }) {
     </>
   );
 }
-
