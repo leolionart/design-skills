@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { LandingPageRenderer } from "@/components/landing/landing-page-renderer";
+import { StyleDemoCursor } from "@/components/providers/style-demo-cursor";
 import { demoStyleSlugs, getStyleBySlug } from "@/lib/themes";
 
 export async function generateStaticParams() {
@@ -34,5 +35,9 @@ export default async function StylePage(props: PageProps<"/styles/[style]">) {
     notFound();
   }
 
-  return <LandingPageRenderer theme={style} />;
+  return (
+    <StyleDemoCursor>
+      <LandingPageRenderer theme={style} />
+    </StyleDemoCursor>
+  );
 }

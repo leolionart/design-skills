@@ -30,6 +30,20 @@ export function TactileLanding({ theme }: { theme: ThemeDefinition }) {
     <>
       <section className="relative overflow-hidden py-8 sm:py-14">
         <FamilyAtmosphere variant="tactile-organic" className="-z-10 opacity-90" />
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div
+            className="absolute -left-10 top-6 h-52 w-52 rounded-full opacity-30 blur-3xl"
+            style={{ background: "var(--theme-accent)" }}
+          />
+          <div
+            className="absolute right-0 top-20 h-64 w-64 rounded-full opacity-25 blur-3xl"
+            style={{ background: "var(--theme-accent-2)" }}
+          />
+          <div
+            className="absolute bottom-0 left-1/3 h-56 w-56 rounded-full opacity-20 blur-3xl"
+            style={{ background: "var(--theme-bg-alt)" }}
+          />
+        </div>
 
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">

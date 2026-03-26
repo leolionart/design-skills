@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRandomPhoto } from "@/lib/unsplash";
 
+function picsumFallback(query: string) {
+  const seed = encodeURIComponent(query.trim().toLowerCase().replace(/\s+/g, "-"));
+  return `https://picsum.photos/seed/${seed}/1200/800`;
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get("query");
@@ -12,9 +17,23 @@ export async function GET(request: NextRequest) {
 
   try {
     const photo = await getRandomPhoto(query);
+    const fallbackUrl = picsumFallback(query);
 
     if (!photo) {
-      return NextResponse.json({ error: "No photo found" }, { status: 404 });
+      if (mode === "image") {
+        return NextResponse.redirect(fallbackUrl, { status: 307 });
+      }
+      return NextResponse.json({
+        id: `fallback-${query}`,
+        url: fallbackUrl,
+        fullUrl: fallbackUrl,
+        altDescription: `Fallback image for ${query}`,
+        photographer: {
+          name: "Picsum",
+          username: "picsum",
+          link: "https://picsum.photos/",
+        },
+      });
     }
 
     if (mode === "image") {
@@ -34,6 +53,20 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error fetching Unsplash photo:", error);
-    return NextResponse.json({ error: "Failed to fetch photo" }, { status: 500 });
+    const fallbackUrl = picsumFallback(query);
+    if (mode === "image") {
+      return NextResponse.redirect(fallbackUrl, { status: 307 });
+    }
+    return NextResponse.json({
+      id: `fallback-${query}`,
+      url: fallbackUrl,
+      fullUrl: fallbackUrl,
+      altDescription: `Fallback image for ${query}`,
+      photographer: {
+        name: "Picsum",
+        username: "picsum",
+        link: "https://picsum.photos/",
+      },
+    });
   }
 }
