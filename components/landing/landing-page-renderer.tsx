@@ -2,7 +2,7 @@ import {
   DemoStyleSidebar,
   DemoStyleSidebarDrawer,
 } from "@/components/landing/demo-style-sidebar";
-import { StandardLanding } from "@/components/landing/standard-landing";
+import { familyRenderers } from "@/components/landing/families/registry";
 import { CopyPromptButton } from "@/components/shell/copy-prompt-button";
 import { StyleIntelligencePanel } from "@/components/shell/style-intelligence-panel";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ import { styleFamilies } from "@/lib/style-families";
 import { demoStyles, type ThemeDefinition } from "@/lib/themes";
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
+  const Renderer = familyRenderers[theme.family];
   const family = styleFamilies[theme.family];
   const demoStyleLinks = demoStyles.map((style) => ({
     slug: style.slug,
@@ -51,7 +52,7 @@ export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
         <DemoStyleSidebar currentSlug={theme.slug} styles={demoStyleLinks} />
 
         <div className="min-w-0">
-          <StandardLanding theme={theme} />
+          <Renderer theme={theme} />
           <StyleIntelligencePanel theme={theme} />
 
           <section id="cta" className="py-10 sm:py-16">
