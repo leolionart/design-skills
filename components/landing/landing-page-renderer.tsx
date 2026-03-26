@@ -2,6 +2,7 @@ import {
   DemoStyleSidebar,
   DemoStyleSidebarDrawer,
 } from "@/components/landing/demo-style-sidebar";
+import { AntiDesignLanding } from "@/components/landing/families/anti-design";
 import { BauhausLanding } from "@/components/landing/families/bauhaus";
 import { BentoLanding } from "@/components/landing/families/bento";
 import { CyberpunkLanding } from "@/components/landing/families/cyberpunk";
@@ -30,6 +31,7 @@ const specialRenderers: Record<string, typeof familyRenderers[keyof typeof famil
   "y2k-retro-futurism": Y2KLanding,
   "vaporwave-dreamscape": VaporwaveLanding,
   "sketch-wireframe": SketchLanding,
+  "anti-design": AntiDesignLanding,
 };
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
