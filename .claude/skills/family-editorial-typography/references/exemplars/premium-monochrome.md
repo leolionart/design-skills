@@ -10,9 +10,9 @@ Use neutral color, fine borders, and spacious typographic precision to create a 
 - motion tolerance is low
 
 ## Distinguishing signals
-- colder and more neutral than `meaningful-minimalism`
-- more luxurious and less editorial-warm than `editorial-minimalism`
-- less typographically forceful than `typography-first`
+- colder and more neutral than `editorial-minimalism`
+- less archival and historical than `academia-classical`
+- less ornamental and glamorous than `art-deco-luxe`
 - depends on tone, spacing, and finish rather than expressive type or color
 
 ## Layout directives
@@ -34,12 +34,12 @@ Use neutral color, fine borders, and spacious typographic precision to create a 
 - imagery should feel art-directed and polished, not casual
 
 ## Avoid
-- warmth or softness that turns it into `meaningful-minimalism`
+- warm archival mood that turns it into `academia-classical`
 - too much editorial roughness or visible publication tension
 - decorative gradients or playful color
 - dense product explanation that weakens the luxury tone
 
 ## Review and conversion cues
-- If the page feels calm, humane, and softer than expensive, it is drifting toward `meaningful-minimalism`.
 - If it feels more like a manifesto or publication, it is drifting toward `editorial-minimalism`.
+- If geometry and ornament become explicit luxury cues, it is drifting toward `art-deco-luxe`.
 - To convert from richer or louder premium pages, reduce color first, then tighten spacing and surface restraint.

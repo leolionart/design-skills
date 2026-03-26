@@ -10,8 +10,8 @@ Use varied tile sizes, modular grouping, and scan-friendly density to show many 
 - motion tolerance is low to medium
 
 ## Distinguishing signals
-- denser and more tile-led than `clean-saas-gradient`
-- more modular and higher-contrast in grouping than `inclusive-accessibility-first`
+- denser and more tile-led than `professional-corporate`
+- more modular and less operator-centric than `terminal-interface`
 - uses tile scale and composition as the main storytelling device
 - can feel more product-demo-like than a traditional landing page
 
@@ -40,6 +40,6 @@ Use varied tile sizes, modular grouping, and scan-friendly density to show many 
 - over-polished surfaces that erase the modular logic
 
 ## Review and conversion cues
-- If the page feels cleaner and less tile-driven, it is drifting toward `clean-saas-gradient`.
-- If density starts to hurt readability and confidence, it is drifting toward `inclusive-accessibility-first` territory.
+- If the page feels cleaner and more executive than tile-driven, it is drifting toward `professional-corporate`.
+- If the page shifts to console hierarchy and operator language, it is drifting toward `terminal-interface`.
 - To convert from linear product pages, introduce tile hierarchy before adding more content.

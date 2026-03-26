@@ -2,19 +2,20 @@
 
 ## Exemplar chooser
 - `bento-grid` -> use for modular, scan-heavy, tile-based product storytelling.
-- `clean-saas-gradient` -> use for practical, polished, conversion-friendly SaaS and AI launches.
-- `inclusive-accessibility-first` -> use when clarity, readable hierarchy, strong contrast, and broad usability are part of the visual strategy.
+- `professional-corporate` -> use for enterprise trust, executive clarity, and structured B2B polish.
+- `terminal-interface` -> use for devtools/infra operator mood with console hierarchy.
+- `bauhaus-geometric` -> use for strict modernist geometry and primary-color modularity.
 
 ## Quick differentiation rules
-- Choose `inclusive-accessibility-first` over `clean-saas-gradient` when readability, control size, and contrast confidence matter more than polished startup aesthetics.
-- Choose `clean-saas-gradient` over `bento-grid` when the page should feel cleaner and less tile-dense.
-- Choose `bento-grid` over `clean-saas-gradient` when many benefits must be visible quickly in modular form.
-- Choose `inclusive-accessibility-first` over `bento-grid` when dense tiling would increase cognitive load.
+- Choose `professional-corporate` over `bento-grid` when trust and executive clarity matter more than tile density.
+- Choose `bento-grid` over `professional-corporate` when many benefits must be visible quickly in modular form.
+- Choose `terminal-interface` over `professional-corporate` when the audience expects explicit technical/operator language.
+- Choose `bauhaus-geometric` over `bento-grid` when strict graphic modularity is the main differentiator.
 
 ## Safe blends
-- `clean-saas-gradient` + immersive-premium for one premium hero layer
 - `bento-grid` + high-agency for stronger launch hierarchy
-- `inclusive-accessibility-first` + clean-saas-gradient for modern but highly readable product systems
+- `professional-corporate` + immersive-premium for premium enterprise launches
+- `terminal-interface` + immersive-premium for high-tech infra storytelling
 
 ## Escalation rule
 Use this file to pick the product grammar first. Open an exemplar pack only when the brief strongly emphasizes readability strategy, contrast discipline, or a specific module style.

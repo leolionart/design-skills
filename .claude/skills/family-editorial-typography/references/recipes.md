@@ -2,20 +2,19 @@
 
 ## Exemplar chooser
 - `editorial-minimalism` -> use for refined editorial layouts with clear structure, strong rhythm, and restrained luxury.
-- `typography-first` -> use when type itself must dominate as the main visual system.
 - `premium-monochrome` -> use for luxury-neutral, monochrome, expensive-feeling interfaces with quiet authority.
-- `meaningful-minimalism` -> use for serene, calm, slow, understated premium interfaces where softness matters more than luxury drama.
+- `academia-classical` -> use for scholarly, archival, institution-grade authority with warm historical depth.
+- `art-deco-luxe` -> use for geometric luxury, invitation energy, and hospitality-grade glamour.
 
 ## Quick differentiation rules
-- Choose `meaningful-minimalism` over `premium-monochrome` when the tone should feel calm, humane, or wellness-oriented rather than luxury-fashion.
 - Choose `premium-monochrome` over `editorial-minimalism` when neutrality and expensive restraint matter more than editorial warmth.
-- Choose `typography-first` over `editorial-minimalism` when the headline and typographic voice must become the hero.
-- Choose `editorial-minimalism` over `meaningful-minimalism` when the page still needs sharper structure and more visible editorial rhythm.
+- Choose `academia-classical` over `editorial-minimalism` when institutional credibility and archival mood matter more than contemporary editorial polish.
+- Choose `art-deco-luxe` over `premium-monochrome` when decorative geometric glamour matters more than neutral restraint.
 
 ## Safe blends
 - `editorial-minimalism` + high-agency for sharper launch energy
 - `premium-monochrome` + grid-product for clearer product structure
-- `meaningful-minimalism` + tactile-organic for softer premium warmth
+- `academia-classical` + grid-product for authority-led explainers
 
 ## Escalation rule
 Start with family doctrine and this chooser. Open one exemplar pack only after the brief clearly points to a specific editorial mood. If two exemplars are still plausible, compare their distinguishing signals before giving coding directives.
