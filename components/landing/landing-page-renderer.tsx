@@ -4,6 +4,8 @@ import {
 } from "@/components/landing/demo-style-sidebar";
 import { BauhausLanding } from "@/components/landing/families/bauhaus";
 import { BentoLanding } from "@/components/landing/families/bento";
+import { CyberpunkLanding } from "@/components/landing/families/cyberpunk";
+import { MotionLanding } from "@/components/landing/families/motion";
 import { familyRenderers } from "@/components/landing/families/registry";
 import { UiLayoutsHero } from "@/components/landing/ui-layouts-hero";
 import { CopyPromptButton } from "@/components/shell/copy-prompt-button";
@@ -18,6 +20,8 @@ import { demoStyles, type ThemeDefinition } from "@/lib/themes";
 const specialRenderers: Record<string, typeof familyRenderers[keyof typeof familyRenderers]> = {
   "bauhaus-geometric": BauhausLanding,
   "bento-grid": BentoLanding,
+  "cyberpunk-neon": CyberpunkLanding,
+  "motion-led-storytelling": MotionLanding,
 };
 
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
