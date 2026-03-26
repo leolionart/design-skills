@@ -458,20 +458,20 @@ const themeSeeds: StyleSeed[] = [
     keywords: ["mesh gradient ui", "blob interface design", "organic gradient website", "ambient color field web"],
     designPromptId: "organic",
     vars: vars({
-      "--theme-bg": "#f7f4ff",
-      "--theme-bg-alt": "#e7eeff",
-      "--theme-surface": "rgba(255, 255, 255, 0.78)",
-      "--theme-surface-strong": "rgba(255, 255, 255, 0.92)",
-      "--theme-text": "#201a38",
-      "--theme-muted": "#716d98",
-      "--theme-border": "rgba(32, 26, 56, 0.1)",
-      "--theme-accent": "#8d7dff",
-      "--theme-accent-2": "#73d9ff",
-      "--theme-accent-contrast": "#201a38",
-      "--theme-ring": "rgba(141, 125, 255, 0.24)",
-      "--theme-shadow": "0 24px 64px rgba(141, 125, 255, 0.16)",
-      "--theme-grid": "rgba(32, 26, 56, 0.05)",
-      "--theme-radius": "30px",
+      "--theme-bg": "#f0f2ff", // More vibrant purple-ish white
+      "--theme-bg-alt": "#e0e7ff",
+      "--theme-surface": "rgba(255, 255, 255, 0.4)", // Translucent for glass effect
+      "--theme-surface-strong": "rgba(255, 255, 255, 0.7)", // Translucent but stronger
+      "--theme-text": "#1e1b4b", // Deep indigo
+      "--theme-muted": "#6366f1", // Indigo accent
+      "--theme-border": "rgba(255, 255, 255, 0.4)", // White border for glass
+      "--theme-accent": "#818cf8", // Vibrant Indigo
+      "--theme-accent-2": "#c084fc", // Vibrant Purple
+      "--theme-accent-contrast": "#ffffff",
+      "--theme-ring": "rgba(99, 102, 241, 0.3)",
+      "--theme-shadow": "0 8px 32px 0 rgba(31, 38, 135, 0.07)", // Glassmorphism shadow
+      "--theme-grid": "rgba(99, 102, 241, 0.05)",
+      "--theme-radius": "24px", // Slightly tighter radius for glass panels
     }),
   },
   {
