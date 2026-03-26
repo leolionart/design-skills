@@ -64,6 +64,18 @@ const baseVars: Record<`--${string}`, string> = {
   "--theme-font-serif": "var(--font-editorial), Georgia, serif",
   "--theme-font-mono": "var(--font-ibm-plex-mono), ui-monospace, monospace",
   "--theme-radius": "28px",
+  "--theme-button-radius": "999px",
+  "--theme-button-border-width": "1px",
+  "--theme-button-border-style": "solid",
+  "--theme-button-letter-spacing": "0.02em",
+  "--theme-button-text-transform": "none",
+  "--theme-button-font": "var(--theme-font-body)",
+  "--theme-button-font-weight": "600",
+  "--theme-button-shadow": "var(--theme-shadow)",
+  "--theme-button-shadow-secondary": "none",
+  "--theme-shape-radius": "18px",
+  "--theme-shape-outline-width": "1px",
+  "--theme-shape-outline-style": "solid",
 };
 
 function vars(overrides: Record<`--${string}`, string>): StyleVariables {
@@ -874,7 +886,7 @@ const themeSeeds: StyleSeed[] = [
     kicker: "CLI / monospace / functional",
     summary: "A raw retro-futuristic command-line aesthetic with monospaced precision, blinking cursors, and strong functional contrast.",
     audience: "Developer tools, infrastructure products, AI agent tooling, and operations-heavy software",
-    family: "grid-product",
+    family: "immersive-premium",
     primaryLanguage: "Precise monospace typography, strong contrast, and a raw command-line feel",
     supportingTreatments: [
       "Cursor blink",
@@ -901,19 +913,19 @@ const themeSeeds: StyleSeed[] = [
     featured: false,
     demoAvailable: true,
     vars: vars({
-      "--theme-bg": "hsl(276 35% 8%)",
-      "--theme-bg-alt": "hsl(314 32% 12%)",
-      "--theme-surface": "hsl(276 28% 16% / 0.78)",
-      "--theme-surface-strong": "hsl(276 26% 22% / 0.9)",
-      "--theme-text": "hsl(214 100% 96%)",
-      "--theme-muted": "hsl(220 36% 74%)",
-      "--theme-border": "hsl(106 74% 72% / 0.22)",
-      "--theme-accent": "hsl(314 96% 66%)",
-      "--theme-accent-2": "hsl(106 94% 64%)",
-      "--theme-accent-contrast": "hsl(224 40% 10%)",
-      "--theme-ring": "hsl(314 86% 66% / 0.36)",
-      "--theme-shadow": "0 40px 120px rgba(1, 6, 18, 0.56)",
-      "--theme-grid": "hsl(106 70% 80% / 0.08)",
+      "--theme-bg": "hsl(212 22% 7%)",
+      "--theme-bg-alt": "hsl(212 20% 10%)",
+      "--theme-surface": "hsl(212 18% 12% / 0.94)",
+      "--theme-surface-strong": "hsl(212 20% 16% / 0.98)",
+      "--theme-text": "hsl(210 36% 92%)",
+      "--theme-muted": "hsl(210 16% 68%)",
+      "--theme-border": "hsl(145 24% 36% / 0.62)",
+      "--theme-accent": "hsl(143 84% 56%)",
+      "--theme-accent-2": "hsl(165 80% 52%)",
+      "--theme-accent-contrast": "hsl(212 22% 8%)",
+      "--theme-ring": "hsl(143 84% 56% / 0.34)",
+      "--theme-shadow": "0 24px 48px rgba(0, 0, 0, 0.45)",
+      "--theme-grid": "hsl(145 34% 44% / 0.12)",
     }),
   },
   {
@@ -3857,9 +3869,10 @@ const styleRecipeOverrides: Record<
   },
   "terminal": {
     heroVariant: "neon-console",
-    proofVariant: "comparison-grid",
+    proofVariant: "object-spec",
+    ctaVariant: "assertive-dual",
     previewSilhouette: "console",
-    emphasis: "type",
+    emphasis: "material",
     mediaTreatment: "diagrammatic",
   },
   "vaporwave": {
@@ -3990,6 +4003,167 @@ function toStructuralTags(recipe: Omit<StyleRecipe, "structuralSignature" | "str
   ].map((item) => item.replace(/-/g, " "));
 }
 
+const previewRadiusBySilhouette: Record<PreviewSilhouette, number> = {
+  "off-axis": 20,
+  "monolith": 16,
+  "ornament": 32,
+  "tiles": 18,
+  "console": 14,
+  "spotlight": 24,
+  "orbital": 30,
+  "collage": 12,
+  "stacked-cards": 26,
+  "poster": 10,
+};
+
+const buttonRadiusByCta: Record<CtaVariant, number> = {
+  "assertive-dual": 14,
+  "quiet-links": 10,
+  "utility-stack": 12,
+  "luxury-prompt": 999,
+  "gentle-invite": 999,
+  "culture-switch": 8,
+};
+
+function styleHash(slug: string) {
+  let hash = 0;
+  for (let index = 0; index < slug.length; index += 1) {
+    hash = (hash * 31 + slug.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function deriveStyleVariables(
+  style: StyleSeed,
+  recipe: StyleRecipe,
+): Record<`--${string}`, string> {
+  const textSignals = [
+    style.slug,
+    style.modeLabel,
+    style.pageTitle,
+    style.primaryLanguage,
+    style.imageryMode,
+    ...style.keywords,
+    ...style.supportingTreatments,
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  const editorialSignal =
+    style.family === "editorial-typography" ||
+    /editorial|manifesto|serif|newsprint|academia|scholarly|canon|premium monochrome|print/.test(
+      textSignals,
+    );
+  const monoSignal =
+    /terminal|console|cyber|glitch|rgb|code|technical|digital|monospace/.test(textSignals) ||
+    recipe.mediaTreatment === "diagrammatic";
+  const handDrawnSignal =
+    /sketch|hand drawn|hand-drawn|lineart|doodle|comic|illustration/.test(textSignals) ||
+    recipe.mediaTreatment === "hand-drawn";
+  const ornamentalSignal =
+    /ornamental|art deco|gold|liturgical|sacred|archive/.test(textSignals) ||
+    recipe.mediaTreatment === "ornamental";
+  const loudSignal =
+    style.family === "experimental-loud" ||
+    recipe.emphasis === "poster" ||
+    recipe.mediaTreatment === "collaged";
+  const terminalSignal = style.slug === "terminal";
+
+  const hash = styleHash(style.slug);
+  const radiusJitter = hash % 5;
+  const surfaceRadius = terminalSignal
+    ? "8px"
+    : `${previewRadiusBySilhouette[recipe.previewSilhouette] + radiusJitter}px`;
+  const shapeRadius = terminalSignal
+    ? "4px"
+    : `${Math.max(8, previewRadiusBySilhouette[recipe.previewSilhouette] - 4 + (hash % 4))}px`;
+
+  const baseButtonRadius = buttonRadiusByCta[recipe.ctaVariant];
+  const buttonRadius = terminalSignal
+    ? "4px"
+    : baseButtonRadius >= 999
+      ? "999px"
+      : `${Math.max(8, baseButtonRadius + (hash % 3) * 2)}px`;
+  const uppercaseButton =
+    (recipe.ctaVariant === "assertive-dual" ||
+    recipe.ctaVariant === "utility-stack" ||
+    recipe.ctaVariant === "culture-switch") &&
+    !terminalSignal;
+
+  const buttonLetterSpacing = terminalSignal
+    ? "0.04em"
+    : uppercaseButton
+      ? `${((4 + (hash % 4)) / 100).toFixed(2)}em`
+      : `${((1 + (hash % 3)) / 100).toFixed(2)}em`;
+
+  const buttonTextTransform = terminalSignal ? "none" : uppercaseButton ? "uppercase" : "none";
+  const buttonFont = terminalSignal
+    ? "var(--theme-font-mono)"
+    : monoSignal
+    ? "var(--theme-font-mono)"
+    : editorialSignal || recipe.ctaVariant === "luxury-prompt"
+      ? "var(--theme-font-serif)"
+      : "var(--theme-font-body)";
+  const buttonFontWeight = terminalSignal
+    ? "600"
+    : recipe.ctaVariant === "assertive-dual" || recipe.ctaVariant === "culture-switch"
+      ? "700"
+      : recipe.ctaVariant === "quiet-links"
+        ? "500"
+        : "600";
+
+  let borderStyle = "solid";
+  if (!terminalSignal && handDrawnSignal) borderStyle = "dashed";
+  if (!terminalSignal && ornamentalSignal) borderStyle = "double";
+
+  const strongOutline =
+    terminalSignal ||
+    loudSignal ||
+    recipe.previewSilhouette === "console" ||
+    recipe.mediaTreatment === "diagrammatic" ||
+    recipe.emphasis === "grid";
+
+  const outlineWidth = terminalSignal ? "1px" : strongOutline ? "2px" : "1px";
+  const displayFont = terminalSignal
+    ? "var(--theme-font-mono)"
+    : monoSignal
+    ? "var(--theme-font-mono)"
+    : editorialSignal || recipe.mediaTreatment === "ornamental"
+      ? "var(--theme-font-serif)"
+      : "var(--theme-font-body)";
+  const bodyFont = terminalSignal
+    ? "var(--font-ibm-plex-mono), ui-monospace, monospace"
+    : monoSignal && recipe.mediaTreatment === "diagrammatic"
+      ? "var(--font-ibm-plex-mono), ui-monospace, monospace"
+      : "var(--font-manrope), system-ui, sans-serif";
+
+  const buttonShadow = terminalSignal
+    ? "none"
+    : recipe.ctaVariant === "quiet-links"
+      ? "none"
+      : recipe.emphasis === "poster"
+        ? "6px 6px 0 rgba(10, 10, 10, 0.88)"
+        : "var(--theme-shadow)";
+
+  return {
+    "--theme-font-display": displayFont,
+    "--theme-font-body": bodyFont,
+    "--theme-radius": surfaceRadius,
+    "--theme-shape-radius": shapeRadius,
+    "--theme-shape-outline-width": outlineWidth,
+    "--theme-shape-outline-style": borderStyle,
+    "--theme-button-radius": buttonRadius,
+    "--theme-button-border-width": outlineWidth,
+    "--theme-button-border-style": borderStyle,
+    "--theme-button-letter-spacing": buttonLetterSpacing,
+    "--theme-button-text-transform": buttonTextTransform,
+    "--theme-button-font": buttonFont,
+    "--theme-button-font-weight": buttonFontWeight,
+    "--theme-button-shadow": buttonShadow,
+    "--theme-button-shadow-secondary": recipe.ctaVariant === "luxury-prompt" ? buttonShadow : "none",
+  };
+}
+
 function assertRecipe(style: StyleSeed, recipe: Omit<StyleRecipe, "structuralSignature" | "structuralTags">) {
   const constraints = styleFamilies[style.family].constraints;
 
@@ -4059,10 +4233,19 @@ function assertUniqueSlugs(items: StyleSeed[]) {
 
 assertUniqueSlugs(themeSeeds);
 
-export const themes: StyleDefinition[] = themeSeeds.map((style) => ({
-  ...style,
-  recipe: buildRecipe(style),
-}));
+export const themes: StyleDefinition[] = themeSeeds.map((style) => {
+  const recipe = buildRecipe(style);
+  const derivedVars: StyleVariables = {
+    ...style.vars,
+    ...deriveStyleVariables(style, recipe),
+  };
+
+  return {
+    ...style,
+    vars: derivedVars,
+    recipe,
+  };
+});
 
 export const styles = themes;
 export const demoStyles = styles.filter((style) => style.demoAvailable !== false);

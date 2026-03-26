@@ -95,9 +95,9 @@ const SLUG_FAMILY_OVERRIDES = {
   botanical: "tactile-organic",
   kinetic: "immersive-premium",
   cyberpunk: "immersive-premium",
+  terminal: "immersive-premium",
   vaporwave: "experimental-loud",
   maximalist: "experimental-loud",
-  terminal: "grid-product",
 };
 
 const LEGACY_SLUG_REPLACEMENTS = {
@@ -161,9 +161,10 @@ const STYLE_RECIPE_OVERRIDES = {
   },
   terminal: {
     heroVariant: "neon-console",
-    proofVariant: "comparison-grid",
+    proofVariant: "object-spec",
+    ctaVariant: "assertive-dual",
     previewSilhouette: "console",
-    emphasis: "type",
+    emphasis: "material",
     mediaTreatment: "diagrammatic",
   },
   "catholic-mondrianism": {
@@ -400,6 +401,24 @@ function paletteForStyle(style, family) {
   const h1 = hue(slug, 38);
   const h2 = hue(slug, 190);
 
+  if (slug === "terminal") {
+    return {
+      "--theme-bg": "hsl(212 22% 7%)",
+      "--theme-bg-alt": "hsl(212 20% 10%)",
+      "--theme-surface": "hsl(212 18% 12% / 0.94)",
+      "--theme-surface-strong": "hsl(212 20% 16% / 0.98)",
+      "--theme-text": "hsl(210 36% 92%)",
+      "--theme-muted": "hsl(210 16% 68%)",
+      "--theme-border": "hsl(145 24% 36% / 0.62)",
+      "--theme-accent": "hsl(143 84% 56%)",
+      "--theme-accent-2": "hsl(165 80% 52%)",
+      "--theme-accent-contrast": "hsl(212 22% 8%)",
+      "--theme-ring": "hsl(143 84% 56% / 0.34)",
+      "--theme-shadow": "0 24px 48px rgba(0, 0, 0, 0.45)",
+      "--theme-grid": "hsl(145 34% 44% / 0.12)",
+    };
+  }
+
   const darkSignal = /(dark|night|neon|cyber|terminal|glitch|vaporwave|retro|aurora|cinemagraph|particle)/;
   const shouldUseDark = darkSignal.test(textProbe);
 
@@ -520,6 +539,7 @@ function normalizeStyle(style) {
   }
 
   const family = inferFamily(style);
+  const naaiFamily = String(style.family ?? "").trim() || "unknown";
   const keywords = uniqueList(ensureArray(style.keywords));
   const supportingTreatments = uniqueList(ensureArray(style.supporting_treatments_en));
   const avoidList = uniqueList(ensureArray(style.avoid_list_en));
@@ -544,6 +564,7 @@ function normalizeStyle(style) {
       String(style.audience_en ?? "").trim() ||
       "Product, design, and marketing teams selecting a differentiated landing-page direction.",
     family,
+    naaiFamily,
     primaryLanguage:
       String(style.primary_language_en ?? "").trim() ||
       "Layout, hierarchy, and material treatment tuned from NAAI style semantics.",
@@ -701,32 +722,168 @@ ${FAMILY_ORDER.map(
   (family) =>
     `- ${family} -> ${grouped[family].map((slug) => `\`${slug}\``).join(", ") || "_none_"}`,
 ).join("\n")}
+
+## Style-specific guardrails
+- \`terminal\` is mapped to immersive-premium for family routing, but should keep hard-edged command-line controls and avoid pill-shaped CTAs.
 `;
 }
 
 function buildRecipesContent(family, styles) {
-  const demoStyles = styles
-    .filter((style) => style.family === family && style.demoAvailable)
+  const familyStyles = styles
+    .filter((style) => style.family === family)
     .sort((a, b) => a.displayOrder - b.displayOrder || a.slug.localeCompare(b.slug));
 
+  const trimmed = (value) => String(value ?? "").replace(/\s+/g, " ").trim();
+  const sentence = (value) => {
+    const clean = trimmed(value);
+    if (!clean) return "";
+    return /[.!?]$/.test(clean) ? clean : `${clean}.`;
+  };
+  const lowerFirst = (value) => {
+    const clean = trimmed(value);
+    if (!clean) return "";
+    return clean.charAt(0).toLowerCase() + clean.slice(1);
+  };
+  const list = (items, limit = 3) => uniqueList(ensureArray(items)).slice(0, limit);
+  const bulletLines = (items, fallback) => {
+    const current = list(items);
+    if (current.length > 0) {
+      return current.map((item) => `- ${sentence(item)}`).join("\n");
+    }
+    return `- ${sentence(fallback)}`;
+  };
+  const normalizeTokens = (value) =>
+    trimmed(value)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(" ")
+      .map((token) => token.trim())
+      .filter((token) => token.length >= 3);
+  const tokenSetForStyle = (style) => {
+    const tokens = [
+      style.slug.replace(/-/g, " "),
+      style.modeLabel,
+      style.pageTitle,
+      style.primaryLanguage,
+      ...list(style.keywords, 8),
+      ...list(style.supportingTreatments, 6),
+    ].flatMap((item) => normalizeTokens(item));
+    return new Set(tokens);
+  };
+  const overlapCount = (left, right) => {
+    let score = 0;
+    for (const token of left) {
+      if (right.has(token)) score += 1;
+    }
+    return score;
+  };
+  const siblingFor = (style) => {
+    const baseTokens = tokenSetForStyle(style);
+    return familyStyles
+      .filter((candidate) => candidate.slug !== style.slug)
+      .map((candidate) => ({
+        candidate,
+        score: overlapCount(baseTokens, tokenSetForStyle(candidate)),
+      }))
+      .sort((a, b) => b.score - a.score || a.candidate.slug.localeCompare(b.candidate.slug))
+      .slice(0, 2)
+      .map((item) => item.candidate);
+  };
+
+  const styleBlocks =
+    familyStyles.length > 0
+      ? familyStyles
+          .map((style) => {
+            const pageTitle = sentence(style.pageTitle.replace(/\.+$/, "").trim());
+            const summary = sentence(style.summary);
+            const language = sentence(style.primaryLanguage);
+            const imagery = sentence(style.imageryMode);
+            const contrasts = siblingFor(style)
+              .map((candidate) => {
+                const candidateLanguage = lowerFirst(
+                  candidate.primaryLanguage || candidate.pageTitle || candidate.modeLabel,
+                );
+                const candidateImagery = lowerFirst(candidate.imageryMode);
+                const candidateProfile = candidateImagery
+                  ? `${candidateLanguage} with ${candidateImagery}`
+                  : candidateLanguage;
+                return `- Keep \`${style.slug}\` anchored in ${lowerFirst(style.primaryLanguage || style.pageTitle || style.modeLabel)}; avoid drifting toward \`${candidate.slug}\` (${candidateProfile}).`;
+              })
+              .join("\n");
+            const availability = style.demoAvailable
+              ? "Live demo available."
+              : "Reference-only style (no dedicated live demo route).";
+            const terminalGuidance =
+              style.slug === "terminal"
+                ? "- Keep controls hard-edged and near-rectangular (Warp/Terminus-like); avoid rounded-pill buttons and soft card geometry."
+                : "";
+
+            return `### \`${style.slug}\`
+
+**NAAI profile**
+- Name: ${style.modeLabel}
+- NAAI family: ${style.naaiFamily}
+- Local family mapping: \`${style.family}\`
+- Availability: ${availability}
+
+**Core distinction**
+${summary}
+
+**Page intent**
+${pageTitle}
+
+**Structural language**
+${language}
+
+**Supporting treatments**
+${bulletLines(style.supportingTreatments, "Composition rhythm, surface language, and hierarchy contrast should reinforce the style intent.")}
+
+**Imagery mode**
+${imagery}
+
+**Preview cues (NAAI)**
+${bulletLines(style.previewBullets, "Differentiated hierarchy rhythm, distinct surface language, and purposeful identity cues.")}
+
+**Avoid**
+${bulletLines(style.avoidList, "Palette-only styling without layout changes and mixed visual languages that collapse hierarchy.")}
+
+**Keywords**
+${bulletLines(style.keywords, `${style.slug.replace(/-/g, " ")} and ${style.family.replace(/-/g, " ")} signals.`)}
+
+**Differentiation guidance for AI**
+- Keep this style anchored in its NAAI page intent and structural language before adjusting color.
+- Use the supporting treatments together as a system, not as isolated decorative effects.
+- Maintain the stated imagery mode and avoid list to prevent drift into nearby styles.
+${contrasts || "- Contrast against sibling styles by preserving this style's structural language and imagery cues."}
+${terminalGuidance}
+- Use preview cues and keywords as guardrails when expanding prompts or generating variants.
+`;
+          })
+          .join("\n")
+      : "No active style in this family at the moment.";
+
   const chooserLines =
-    demoStyles.length > 0
-      ? demoStyles
+    familyStyles.length > 0
+      ? familyStyles
           .map(
             (style) =>
-              `- \`${style.slug}\` -> ${style.pageTitle.replace(/\.+$/, "").trim()}.`,
+              `- \`${style.slug}\`${style.demoAvailable ? "" : " (reference-only)"} -> ${style.pageTitle.replace(/\.+$/, "").trim()}.`,
           )
           .join("\n")
-      : "- _No demo-enabled style in this family at the moment._";
+      : "- _No active style in this family at the moment._";
 
   return `# Recipes
 
 ## Exemplar chooser
 ${chooserLines}
 
+## NAAI style differentiation details (all active styles)
+${styleBlocks}
+
 ## Sync note
 - This file is generated by naai-sync.
-- Demo-enabled styles are sourced from NAAI and grouped by local family mapping.
+- Styles are sourced from NAAI and grouped by local family mapping.
+- Reference-only styles are included for guidance even when they do not have a live demo route.
 `;
 }
 

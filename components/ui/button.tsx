@@ -18,6 +18,7 @@ const variantStyles: Record<NonNullable<ButtonProps["variant"]>, CSSProperties> 
   primary: {
     backgroundColor: "var(--theme-accent)",
     color: "var(--theme-accent-contrast)",
+    borderColor: "transparent",
   },
   secondary: {
     backgroundColor: "var(--theme-surface-strong)",
@@ -31,6 +32,24 @@ const variantStyles: Record<NonNullable<ButtonProps["variant"]>, CSSProperties> 
   },
 };
 
+function sharedButtonStyle(variant: NonNullable<ButtonProps["variant"]>): CSSProperties {
+  return {
+    borderRadius: "var(--theme-button-radius)",
+    borderWidth: "var(--theme-button-border-width)",
+    borderStyle: "var(--theme-button-border-style)",
+    letterSpacing: "var(--theme-button-letter-spacing)",
+    textTransform: "var(--theme-button-text-transform)",
+    fontFamily: "var(--theme-button-font)",
+    fontWeight: "var(--theme-button-font-weight)",
+    boxShadow:
+      variant === "primary"
+        ? "var(--theme-button-shadow)"
+        : variant === "secondary"
+          ? "var(--theme-button-shadow-secondary)"
+          : "none",
+  };
+}
+
 export function Button({
   href,
   children,
@@ -40,9 +59,9 @@ export function Button({
   return (
     <Link
       href={href}
-      style={variantStyles[variant]}
+      style={{ ...variantStyles[variant], ...sharedButtonStyle(variant) }}
       className={[
-        "inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold tracking-[0.02em] no-underline transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--theme-bg)]",
+        "inline-flex items-center justify-center px-5 py-3 text-sm no-underline transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--theme-bg)]",
         variantClasses[variant],
         className,
       ].join(" ")}

@@ -43,6 +43,12 @@ Choose a material model.
 - soft tactile depth
 - hard-edge poster logic
 
+When mapping to this repo, always define style-level variation (not just family-level) across:
+- display/body font voice
+- button radius, stroke, case, and font
+- shape radius and outline behavior
+- border radius/stroke rhythm on surfaces and chips
+
 ## 6. Motion
 Set motion budget early.
 - static

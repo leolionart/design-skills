@@ -106,6 +106,18 @@ function resolvePatternId(theme: ThemeDefinition): HeroPatternId {
 
 export function UiLayoutsHero({ theme }: { theme: ThemeDefinition }) {
   const pattern = heroPatterns[resolvePatternId(theme)];
+  const shapeClasses = {
+    "off-axis": "h-14 w-14 rounded-[calc(var(--theme-shape-radius)+8px)] rotate-[-8deg]",
+    monolith: "h-16 w-8 rounded-[calc(var(--theme-shape-radius)-6px)]",
+    ornament: "h-12 w-12 rounded-full border-2",
+    tiles: "h-10 w-10 rounded-[10px]",
+    console: "h-10 w-16 rounded-[8px]",
+    spotlight: "h-14 w-14 rounded-full",
+    orbital: "h-14 w-14 rounded-full blur-[0.5px]",
+    collage: "h-11 w-11 rounded-[6px] rotate-[-6deg]",
+    "stacked-cards": "h-12 w-14 rounded-[14px] rotate-[-3deg]",
+    poster: "h-12 w-10 rounded-[4px] rotate-[2deg]",
+  }[theme.recipe.previewSilhouette];
 
   return (
     <section className="py-8 sm:py-12">
@@ -125,6 +137,27 @@ export function UiLayoutsHero({ theme }: { theme: ThemeDefinition }) {
               <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--theme-muted)] sm:text-base">
                 {pattern.description}
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {theme.previewBullets.slice(0, 3).map((bullet) => (
+                  <span
+                    key={bullet}
+                    style={{
+                      borderWidth: "var(--theme-shape-outline-width)",
+                      borderStyle: "var(--theme-shape-outline-style)",
+                    }}
+                    className="inline-flex items-center gap-2 rounded-[var(--theme-shape-radius)] border border-[var(--theme-border)] bg-[var(--theme-bg)]/75 px-3 py-2 text-xs font-semibold tracking-[0.12em] text-[var(--theme-muted)]"
+                  >
+                    <span
+                      style={{
+                        borderWidth: "var(--theme-shape-outline-width)",
+                        borderStyle: "var(--theme-shape-outline-style)",
+                      }}
+                      className={`${shapeClasses} border border-[var(--theme-border)] bg-[var(--theme-accent)]/20`}
+                    />
+                    <span className="max-w-[16rem] truncate">{bullet}</span>
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Button href="#" className="pointer-events-none">

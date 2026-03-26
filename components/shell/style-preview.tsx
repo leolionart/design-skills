@@ -1,7 +1,11 @@
 import { styleFamilies } from "@/lib/style-families";
 import type { ThemeDefinition } from "@/lib/themes";
 
-function renderSilhouette(theme: ThemeDefinition) {
+export type StylePreviewTheme = Pick<ThemeDefinition, "modeLabel" | "family" | "vars"> & {
+  recipe: Pick<ThemeDefinition["recipe"], "previewSilhouette">;
+};
+
+function renderSilhouette(theme: StylePreviewTheme) {
   const silhouette = theme.recipe.previewSilhouette;
 
   if (silhouette === "off-axis") {
@@ -127,19 +131,40 @@ function renderSilhouette(theme: ThemeDefinition) {
   );
 }
 
-export function StylePreview({ theme }: { theme: ThemeDefinition }) {
+export function StylePreview({
+  theme,
+  compact = false,
+  className,
+  useThemeVars = true,
+}: {
+  theme: StylePreviewTheme;
+  compact?: boolean;
+  className?: string;
+  useThemeVars?: boolean;
+}) {
   const family = styleFamilies[theme.family];
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-[calc(var(--theme-radius)-10px)] border border-[var(--theme-border)] bg-[var(--theme-bg)]">
+    <div
+      style={useThemeVars ? theme.vars : undefined}
+      className={[
+        "relative overflow-hidden rounded-[calc(var(--theme-radius)-10px)] border border-[var(--theme-border)] bg-[var(--theme-bg)]",
+        compact ? "h-full w-full" : "aspect-[4/3]",
+        className ?? "",
+      ].join(" ")}
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--theme-accent)_0%,transparent_42%)] opacity-15" />
       {renderSilhouette(theme)}
-      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-strong)]/90 px-3 py-2 backdrop-blur-sm">
-        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
-          {family.label}
-        </span>
-        <span className="ml-3 truncate text-xs font-semibold text-[var(--theme-text)]">{theme.modeLabel}</span>
-      </div>
+      {compact ? null : (
+        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-strong)]/90 px-3 py-2 backdrop-blur-sm">
+          <span className="truncate text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
+            {family.label}
+          </span>
+          <span className="ml-3 truncate text-xs font-semibold text-[var(--theme-text)]">
+            {theme.modeLabel}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

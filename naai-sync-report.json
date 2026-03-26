@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-26T22:23:45.246Z",
+  "timestamp": "2026-03-26T23:51:18.696Z",
   "source": "https://naai.studio/api/design-styles",
   "summary": {
     "total_remote": 73,
@@ -13,8 +13,8 @@
   "by_family": {
     "high-agency": 3,
     "editorial-typography": 12,
-    "grid-product": 22,
-    "immersive-premium": 8,
+    "grid-product": 21,
+    "immersive-premium": 9,
     "tactile-organic": 10,
     "experimental-loud": 18
   },

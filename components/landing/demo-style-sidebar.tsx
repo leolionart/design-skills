@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { StylePreview, type StylePreviewTheme } from "@/components/shell/style-preview";
 import { Surface } from "@/components/ui/surface";
 import { familyOrder, styleFamilies, type StyleFamily } from "@/lib/style-families";
 
-type DemoStyleNavItem = {
+type DemoStyleNavItem = StylePreviewTheme & {
   slug: string;
-  modeLabel: string;
-  family: StyleFamily;
 };
 
 function groupStyles(styles: DemoStyleNavItem[]) {
@@ -89,17 +88,24 @@ function SidebarContent({
                     href={`/styles/${style.slug}`}
                     onClick={onNavigate}
                     className={[
-                      "block rounded-2xl border px-3 py-3 transition",
+                      "block rounded-2xl border p-2 transition",
                       active
                         ? "border-[var(--theme-accent)] bg-[var(--theme-surface-strong)] shadow-[var(--theme-shadow)]"
                         : "border-transparent bg-transparent hover:border-[var(--theme-border)] hover:bg-[var(--theme-surface-strong)]",
                     ].join(" ")}
                   >
-                    <span className="block text-sm font-semibold text-[var(--theme-text)]">
-                      {style.modeLabel}
-                    </span>
-                    <span className="mt-1 block text-xs uppercase tracking-[0.18em] text-[var(--theme-muted)]">
-                      {styleFamilies[style.family].label}
+                    <span className="flex items-center gap-3">
+                      <span className="h-11 w-14 shrink-0">
+                        <StylePreview theme={style} compact className="rounded-[12px]" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-semibold text-[var(--theme-text)]">
+                          {style.modeLabel}
+                        </span>
+                        <span className="mt-1 block truncate text-xs uppercase tracking-[0.18em] text-[var(--theme-muted)]">
+                          {styleFamilies[style.family].label}
+                        </span>
+                      </span>
                     </span>
                   </Link>
                 );

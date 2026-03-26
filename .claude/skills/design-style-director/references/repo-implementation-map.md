@@ -68,6 +68,24 @@ Common token levers already used in the repo:
 - `--theme-font-display`
 - `--theme-font-body`
 - `--theme-font-mono`
+- `--theme-button-radius`
+- `--theme-button-border-width`
+- `--theme-button-border-style`
+- `--theme-button-letter-spacing`
+- `--theme-button-text-transform`
+- `--theme-button-font`
+- `--theme-button-font-weight`
+- `--theme-button-shadow`
+- `--theme-button-shadow-secondary`
+- `--theme-shape-radius`
+- `--theme-shape-outline-width`
+- `--theme-shape-outline-style`
+
+Style-level differentiation contract (for each style, not only each family):
+- Typography must differ via `--theme-font-display` and/or `--theme-font-body` according to NAAI language.
+- Button personality must differ via button token set above.
+- Shape grammar must differ via `--theme-shape-*` and preview-silhouette-driven geometry.
+- Border radius and stroke behavior must differ via `--theme-radius` plus shape/button border tokens.
 
 ## Express family structure here
 Use `familyRenderers` in `components/landing/families/registry.ts` when the direction changes the dominant page grammar.

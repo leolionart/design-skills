@@ -12,6 +12,8 @@ const modules = [
 ];
 
 export function TechnicalLanding({ theme }: { theme: ThemeDefinition }) {
+  const isTerminal = theme.slug === "terminal";
+
   return (
     <>
       <section className="py-8 sm:py-12">
@@ -36,13 +38,19 @@ export function TechnicalLanding({ theme }: { theme: ThemeDefinition }) {
             </div>
 
             <Surface className="overflow-hidden p-5 shadow-[var(--theme-shadow)] sm:p-6">
+              {isTerminal ? (
+                <div className="mb-4 flex items-center justify-between border border-[var(--theme-border)] bg-[var(--theme-bg)] px-3 py-2 font-[family-name:var(--theme-font-mono)] text-xs text-[var(--theme-muted)]">
+                  <span>operator@runtime:~</span>
+                  <span className="text-[var(--theme-accent)]">live</span>
+                </div>
+              ) : null}
               <div className="grid gap-4 sm:grid-cols-3">
                 {modules.map((column, columnIndex) => (
                   <div key={columnIndex} className="space-y-4">
                     {column.map((cell) => (
                       <div
                         key={cell}
-                        className="rounded-[calc(var(--theme-radius)-14px)] border border-[var(--theme-border)] bg-[var(--theme-surface-strong)] p-4"
+                        className={`${isTerminal ? "rounded-[4px] bg-[var(--theme-bg-alt)]" : "rounded-[calc(var(--theme-radius)-14px)] bg-[var(--theme-surface-strong)]"} border border-[var(--theme-border)] p-4`}
                       >
                         <p className="font-[family-name:var(--theme-font-mono)] text-xs uppercase tracking-[0.2em] text-[var(--theme-muted)]">
                           block_{columnIndex + 1}
@@ -72,7 +80,10 @@ export function TechnicalLanding({ theme }: { theme: ThemeDefinition }) {
               </p>
               <div className="mt-5 space-y-4">
                 {sharedContent.features.map((feature) => (
-                  <div key={feature.title} className="rounded-2xl border border-[var(--theme-border)] p-4">
+                  <div
+                    key={feature.title}
+                    className={`${isTerminal ? "rounded-[4px] bg-[var(--theme-bg-alt)]" : "rounded-2xl"} border border-[var(--theme-border)] p-4`}
+                  >
                     <p className="font-[family-name:var(--theme-font-mono)] text-[11px] uppercase tracking-[0.22em] text-[var(--theme-muted)]">
                       capability
                     </p>
@@ -93,15 +104,21 @@ export function TechnicalLanding({ theme }: { theme: ThemeDefinition }) {
                   route.config
                 </p>
                 <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-[var(--theme-border)] p-4">
+                  <div
+                    className={`${isTerminal ? "rounded-[4px] bg-[var(--theme-bg-alt)]" : "rounded-2xl"} border border-[var(--theme-border)] p-4`}
+                  >
                     <dt className="text-xs uppercase tracking-[0.2em] text-[var(--theme-muted)]">primary</dt>
                     <dd className="mt-2 text-xl font-semibold text-[var(--theme-text)]">{theme.primaryLanguage}</dd>
                   </div>
-                  <div className="rounded-2xl border border-[var(--theme-border)] p-4">
+                  <div
+                    className={`${isTerminal ? "rounded-[4px] bg-[var(--theme-bg-alt)]" : "rounded-2xl"} border border-[var(--theme-border)] p-4`}
+                  >
                     <dt className="text-xs uppercase tracking-[0.2em] text-[var(--theme-muted)]">imagery</dt>
                     <dd className="mt-2 text-xl font-semibold text-[var(--theme-text)]">{theme.imageryMode}</dd>
                   </div>
-                  <div className="rounded-2xl border border-[var(--theme-border)] p-4 sm:col-span-2">
+                  <div
+                    className={`${isTerminal ? "rounded-[4px] bg-[var(--theme-bg-alt)]" : "rounded-2xl"} border border-[var(--theme-border)] p-4 sm:col-span-2`}
+                  >
                     <dt className="text-xs uppercase tracking-[0.2em] text-[var(--theme-muted)]">supporting</dt>
                     <dd className="mt-2 text-base text-[var(--theme-text)]">
                       {theme.supportingTreatments.join(" · ")}

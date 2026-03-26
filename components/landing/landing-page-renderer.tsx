@@ -9,6 +9,7 @@ import { CyberpunkLanding } from "@/components/landing/families/cyberpunk";
 import { MotionLanding } from "@/components/landing/families/motion";
 import { Product3DLanding } from "@/components/landing/families/product-3d";
 import { SketchLanding } from "@/components/landing/families/sketch";
+import { TechnicalLanding } from "@/components/landing/themes/technical";
 import { VaporwaveLanding } from "@/components/landing/families/vaporwave";
 import { Y2KLanding } from "@/components/landing/families/y2k";
 import { familyRenderers } from "@/components/landing/families/registry";
@@ -26,6 +27,7 @@ const specialRenderers: Record<string, typeof familyRenderers[keyof typeof famil
   "catholic-mondrianism": BauhausLanding,
   "bento-grid": BentoLanding,
   cyberpunk: CyberpunkLanding,
+  terminal: TechnicalLanding,
   kinetic: MotionLanding,
   "motion-led-storytelling": MotionLanding,
   "immersive-3d-product": Product3DLanding,
@@ -42,6 +44,10 @@ export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
     slug: style.slug,
     modeLabel: style.modeLabel,
     family: style.family,
+    vars: style.vars,
+    recipe: {
+      previewSilhouette: style.recipe.previewSilhouette,
+    },
   }));
 
   return (
