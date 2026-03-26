@@ -25,31 +25,33 @@ export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
       style={theme.vars}
       className={`theme-shell theme-family-${theme.family} min-h-screen bg-[var(--theme-bg)] text-[var(--theme-text)]`}
     >
-      <div className="border-b border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-sm">
-        <Container className="flex flex-wrap items-center justify-between gap-4 py-5">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--theme-muted)]">
-              {family.label}
-            </p>
-            <h1 className="mt-2 text-lg font-semibold tracking-[-0.03em] text-[var(--theme-text)]">
-              {theme.modeLabel}
-            </h1>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button href="/" variant="ghost">
-              Style library
-            </Button>
-            {theme.designPromptId ? (
-              <CopyPromptButton promptId={theme.designPromptId} variant="secondary" />
-            ) : null}
-            <DemoStyleSidebarDrawer currentSlug={theme.slug} styles={demoStyleLinks} />
-            <Button href="#cta">Jump to CTA</Button>
-          </div>
-        </Container>
-      </div>
+      {/* Fixed sidebar - doesn't push content */}
+      <DemoStyleSidebar currentSlug={theme.slug} styles={demoStyleLinks} />
 
-      <div className="mx-auto grid w-full max-w-[1600px] gap-6 px-5 py-6 sm:px-8 lg:grid-cols-[290px_minmax(0,1fr)] lg:items-start lg:px-12">
-        <DemoStyleSidebar currentSlug={theme.slug} styles={demoStyleLinks} />
+      {/* Main content - full width, with left padding on lg to account for sidebar */}
+      <div className="lg:pl-[280px]">
+        <div className="border-b border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-sm">
+          <Container className="flex flex-wrap items-center justify-between gap-4 py-5">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[var(--theme-muted)]">
+                {family.label}
+              </p>
+              <h1 className="mt-2 text-lg font-semibold tracking-[-0.03em] text-[var(--theme-text)]">
+                {theme.modeLabel}
+              </h1>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button href="/" variant="ghost">
+                Style library
+              </Button>
+              {theme.designPromptId ? (
+                <CopyPromptButton promptId={theme.designPromptId} variant="secondary" />
+              ) : null}
+              <DemoStyleSidebarDrawer currentSlug={theme.slug} styles={demoStyleLinks} />
+              <Button href="#cta">Jump to CTA</Button>
+            </div>
+          </Container>
+        </div>
 
         <div className="min-w-0">
           <Renderer theme={theme} />

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Surface } from "@/components/ui/surface";
 import { familyOrder, styleFamilies, type StyleFamily } from "@/lib/style-families";
@@ -26,16 +26,37 @@ function SidebarContent({
   currentSlug,
   styles,
   onNavigate,
+  scrollContainerRef,
 }: {
   currentSlug: string;
   styles: DemoStyleNavItem[];
   onNavigate?: () => void;
+  scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
 }) {
   const groups = useMemo(() => groupStyles(styles), [styles]);
   const current = styles.find((style) => style.slug === currentSlug);
+  const activeRef = useRef<HTMLAnchorElement>(null);
+
+  // Auto-scroll to active item on mount
+  useEffect(() => {
+    if (activeRef.current && scrollContainerRef?.current) {
+      const container = scrollContainerRef.current;
+      const activeEl = activeRef.current;
+      
+      // Calculate position to center the active item
+      const containerRect = container.getBoundingClientRect();
+      const activeRect = activeEl.getBoundingClientRect();
+      const scrollTop = activeEl.offsetTop - container.offsetTop - (containerRect.height / 2) + (activeRect.height / 2);
+      
+      container.scrollTo({
+        top: Math.max(0, scrollTop),
+        behavior: "instant",
+      });
+    }
+  }, [currentSlug, scrollContainerRef]);
 
   return (
-    <Surface className="overflow-hidden">
+    <>
       <div className="border-b border-[var(--theme-border)] px-5 py-4">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--theme-muted)]">
           Demo navigator
@@ -48,7 +69,10 @@ function SidebarContent({
         </p>
       </div>
 
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto px-3 py-3">
+      <div 
+        ref={scrollContainerRef}
+        className="flex-1 overflow-y-auto px-3 py-3"
+      >
         {groups.map((group) => (
           <div key={group.family} className="mb-4 last:mb-0">
             <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--theme-muted)]">
@@ -61,6 +85,7 @@ function SidebarContent({
                 return (
                   <Link
                     key={style.slug}
+                    ref={active ? activeRef : undefined}
                     href={`/styles/${style.slug}`}
                     onClick={onNavigate}
                     className={[
@@ -83,7 +108,7 @@ function SidebarContent({
           </div>
         ))}
       </div>
-    </Surface>
+    </>
   );
 }
 
@@ -94,9 +119,20 @@ export function DemoStyleSidebar({
   currentSlug: string;
   styles: DemoStyleNavItem[];
 }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <aside id="demo-style-sidebar" className="hidden lg:block lg:sticky lg:top-6 lg:self-start">
-      <SidebarContent currentSlug={currentSlug} styles={styles} />
+    <aside 
+      id="demo-style-sidebar" 
+      className="fixed left-0 top-0 z-40 hidden h-screen w-[280px] border-r border-[var(--theme-border)] bg-[var(--theme-bg)] lg:flex lg:flex-col"
+    >
+      <Surface className="flex h-full flex-col overflow-hidden rounded-none border-0">
+        <SidebarContent 
+          currentSlug={currentSlug} 
+          styles={styles} 
+          scrollContainerRef={scrollContainerRef}
+        />
+      </Surface>
     </aside>
   );
 }
@@ -109,6 +145,7 @@ export function DemoStyleSidebarDrawer({
   styles: DemoStyleNavItem[];
 }) {
   const [open, setOpen] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -140,12 +177,15 @@ export function DemoStyleSidebarDrawer({
                   Close
                 </button>
               </div>
-              <div className="min-h-0 flex-1 p-2">
-                <SidebarContent
-                  currentSlug={currentSlug}
-                  styles={styles}
-                  onNavigate={() => setOpen(false)}
-                />
+              <div className="flex min-h-0 flex-1 flex-col p-2">
+                <Surface className="flex flex-1 flex-col overflow-hidden">
+                  <SidebarContent
+                    currentSlug={currentSlug}
+                    styles={styles}
+                    onNavigate={() => setOpen(false)}
+                    scrollContainerRef={scrollContainerRef}
+                  />
+                </Surface>
               </div>
             </div>
           </div>
