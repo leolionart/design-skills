@@ -76,9 +76,22 @@ export function StyleIntelligencePanel({ theme }: { theme: ThemeDefinition }) {
 
               <div className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--theme-muted)]">
-                  Primary language
+                  Structural signature
                 </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--theme-text)]">{theme.primaryLanguage}</p>
+                <dl className="mt-3 space-y-2 text-sm leading-7 text-[var(--theme-text)]">
+                  <div>
+                    <dt className="font-semibold">Hero</dt>
+                    <dd>{theme.recipe.structuralSignature.hero}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold">Rhythm</dt>
+                    <dd>{theme.recipe.structuralSignature.rhythm}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold">Proof</dt>
+                    <dd>{theme.recipe.structuralSignature.proof}</dd>
+                  </div>
+                </dl>
               </div>
 
               <div className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">

@@ -26,7 +26,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Available styles
 
-Live demo styles:
+All 20 styles now have live demo pages:
 
 - `default-high-agency`
 - `glassmorphism-mature`
@@ -43,9 +43,6 @@ Live demo styles:
 - `organic-mesh-gradients`
 - `premium-monochrome`
 - `motion-led-storytelling`
-
-Illustrated-only catalog styles:
-
 - `iridescent-holographic-chrome`
 - `meaningful-minimalism`
 - `cute-alism-kawaii-brutalism`
@@ -88,3 +85,44 @@ This project intentionally keeps one shared product story, then changes the visu
 - imagery mode
 
 That makes it easier to see the difference between visual style, renderer family, and the trade-offs of each art-direction direction rather than looking at palette swaps alone.
+
+## Structural style recipes
+
+Styles are no longer differentiated only by semantic copy and CSS tokens.
+
+Each entry in `lib/themes.ts` is enriched with a `recipe` layer that defines:
+
+- hero variant
+- rhythm + density
+- proof pattern
+- CTA mode
+- preview silhouette
+- emphasis mode
+- media treatment
+- section sequence
+
+The system now works in two layers:
+
+1. **Family grammar** in `lib/style-families.ts`
+   - defines the broad visual language and constrains which recipe variants are legal for each family
+2. **Per-style recipe** in `lib/themes.ts`
+   - gives each style a more specific structural signature so sibling styles within the same family do not collapse into the same silhouette
+
+This same recipe data is used by:
+
+- landing renderers
+- catalog preview cards
+- structural search keywords
+- style intelligence panels
+
+## Adding a new style
+
+To add a new style:
+
+1. Add the style seed in `lib/themes.ts`
+2. Choose the appropriate `family`
+3. Add or rely on a `styleRecipeOverrides` entry so the style gets the right structural signature
+4. Make sure the recipe passes the family constraints in `lib/style-families.ts`
+5. Verify the preview card, structural search terms, and live demo route all reflect the intended silhouette
+
+This keeps the catalog scalable without creating a separate page component for every style.

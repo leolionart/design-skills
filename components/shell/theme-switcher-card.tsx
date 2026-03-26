@@ -26,6 +26,9 @@ export function ThemeSwitcherCard({ theme }: { theme: ThemeDefinition }) {
               <span className="rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-strong)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-text)]">
                 {hasDemo ? "Live demo" : "Illustrated only"}
               </span>
+              <span className="rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
+                {theme.recipe.previewSilhouette.replace(/-/g, " ")}
+              </span>
             </div>
 
             <h3 className="mt-4 font-[family-name:var(--theme-font-display)] text-3xl leading-tight tracking-[-0.04em] text-[var(--theme-text)]">
@@ -38,26 +41,26 @@ export function ThemeSwitcherCard({ theme }: { theme: ThemeDefinition }) {
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
-                  Primary language
+                  Hero
                 </p>
-                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.primaryLanguage}</p>
+                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.recipe.structuralSignature.hero}</p>
               </div>
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
-                  Imagery
+                  Rhythm
                 </p>
-                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.imageryMode}</p>
+                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.recipe.structuralSignature.rhythm}</p>
               </div>
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--theme-muted)]">
-                  Best fit
+                  Proof
                 </p>
-                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.audience}</p>
+                <p className="mt-2 text-sm text-[var(--theme-text)]">{theme.recipe.structuralSignature.proof}</p>
               </div>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
-              {theme.keywords.slice(0, 5).map((keyword) => (
+              {theme.recipe.structuralTags.slice(0, 6).map((keyword) => (
                 <span
                   key={keyword}
                   className="rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)] px-3 py-1.5 text-xs text-[var(--theme-muted)]"
@@ -79,7 +82,7 @@ export function ThemeSwitcherCard({ theme }: { theme: ThemeDefinition }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 lg:min-w-[160px] lg:items-end">
+          <div className="flex flex-col gap-3 lg:min-w-[180px] lg:items-end">
             {hasDemo ? <Button href={`/styles/${theme.slug}`}>View demo</Button> : null}
             {theme.designPromptId ? (
               <CopyPromptButton
@@ -87,7 +90,7 @@ export function ThemeSwitcherCard({ theme }: { theme: ThemeDefinition }) {
                 variant={hasDemo ? "secondary" : "primary"}
               />
             ) : null}
-            <p className="max-w-[160px] text-right text-xs leading-6 text-[var(--theme-muted)]">
+            <p className="max-w-[180px] text-right text-xs leading-6 text-[var(--theme-muted)]">
               {hasDemo
                 ? hasPrompt
                   ? `${theme.kicker} · prompt available`

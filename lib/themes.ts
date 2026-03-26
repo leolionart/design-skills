@@ -1,8 +1,38 @@
 import type { CSSProperties } from "react";
 
-import type { StyleFamily } from "@/lib/style-families";
+import {
+  styleFamilies,
+  type CtaVariant,
+  type EmphasisMode,
+  type HeroVariant,
+  type MediaTreatment,
+  type PreviewSilhouette,
+  type ProofVariant,
+  type RhythmVariant,
+  type SectionKind,
+  type StyleDensity,
+  type StyleFamily,
+} from "@/lib/style-families";
 
 type StyleVariables = CSSProperties & Record<`--${string}`, string>;
+
+export type StyleRecipe = {
+  heroVariant: HeroVariant;
+  rhythm: RhythmVariant;
+  proofVariant: ProofVariant;
+  ctaVariant: CtaVariant;
+  previewSilhouette: PreviewSilhouette;
+  density: StyleDensity;
+  emphasis: EmphasisMode;
+  mediaTreatment: MediaTreatment;
+  sectionSequence: SectionKind[];
+  structuralTags: string[];
+  structuralSignature: {
+    hero: string;
+    rhythm: string;
+    proof: string;
+  };
+};
 
 export type StyleDefinition = {
   slug: string;
@@ -23,6 +53,7 @@ export type StyleDefinition = {
   previewKind?: string;
   designPromptId?: string;
   vars: StyleVariables;
+  recipe: StyleRecipe;
 };
 
 export type ThemeDefinition = StyleDefinition;
@@ -39,7 +70,9 @@ function vars(overrides: Record<`--${string}`, string>): StyleVariables {
   return { ...baseVars, ...overrides };
 }
 
-export const themes: StyleDefinition[] = [
+type StyleSeed = Omit<StyleDefinition, "recipe">;
+
+const themeSeeds: StyleSeed[] = [
   {
     slug: "default-high-agency",
     modeLabel: "Default high-agency",
@@ -610,8 +643,7 @@ export const themes: StyleDefinition[] = [
       "Excellent for campaign art direction or music-tech launches",
     ],
     keywords: ["iridescent", "holographic", "chrome ui", "metallic interface", "reflective surface ui"],
-    demoAvailable: false,
-    previewKind: "chrome-iridescent",
+    demoAvailable: true,
     vars: vars({
       "--theme-bg": "#f3f3ff",
       "--theme-bg-alt": "#dfe6ff",
@@ -648,8 +680,7 @@ export const themes: StyleDefinition[] = [
       "Well suited to brands that need a calm, mature tone",
     ],
     keywords: ["meaningful minimalism", "zen ui", "editorial minimal ui", "quiet luxury website", "swiss layout web"],
-    demoAvailable: false,
-    previewKind: "zen-editorial",
+    demoAvailable: true,
     vars: vars({
       "--theme-bg": "#f4f1ea",
       "--theme-bg-alt": "#e6e0d5",
@@ -687,8 +718,7 @@ export const themes: StyleDefinition[] = [
       "Especially strong for consumer or youth-facing brands",
     ],
     keywords: ["cute alism", "kawaii brutalism", "playful brutalist ui", "cute geometric interface", "friendly bold ui"],
-    demoAvailable: false,
-    previewKind: "kawaii-brutalism",
+    demoAvailable: true,
     vars: vars({
       "--theme-bg": "#fff1f5",
       "--theme-bg-alt": "#ffe176",
@@ -725,8 +755,7 @@ export const themes: StyleDefinition[] = [
       "Strong for brands with a clear artistic point of view",
     ],
     keywords: ["brutalist editorial", "zine style", "editorial brutalism", "raw editorial layout", "deconstructed typography website"],
-    demoAvailable: false,
-    previewKind: "zine-collage",
+    demoAvailable: true,
     vars: vars({
       "--theme-bg": "#f3eee6",
       "--theme-bg-alt": "#d84a2a",
@@ -763,8 +792,7 @@ export const themes: StyleDefinition[] = [
       "Shows that accessibility can have its own visual identity",
     ],
     keywords: ["inclusive design", "accessibility first ui", "high contrast accessible interface", "readable dashboard ui", "wcag friendly product design"],
-    demoAvailable: false,
-    previewKind: "inclusive-contrast",
+    demoAvailable: true,
     vars: vars({
       "--theme-bg": "#f7f5ee",
       "--theme-bg-alt": "#ffe36e",
@@ -1188,6 +1216,367 @@ export const themes: StyleDefinition[] = [
     }),
   },
 ];
+
+const familyDefaults: Record<
+  StyleFamily,
+  Omit<StyleRecipe, "structuralSignature" | "structuralTags">
+> = {
+  "high-agency": {
+    heroVariant: "launch-swing",
+    rhythm: "swing",
+    proofVariant: "metric-band",
+    ctaVariant: "assertive-dual",
+    previewSilhouette: "off-axis",
+    density: "balanced",
+    emphasis: "grid",
+    mediaTreatment: "abstract",
+    sectionSequence: ["hero", "proof", "features", "quote", "details"],
+  },
+  "editorial-typography": {
+    heroVariant: "manifesto-split",
+    rhythm: "reading",
+    proofVariant: "editorial-notes",
+    ctaVariant: "quiet-links",
+    previewSilhouette: "monolith",
+    density: "airy",
+    emphasis: "type",
+    mediaTreatment: "type-led",
+    sectionSequence: ["hero", "features", "quote", "details", "proof"],
+  },
+  "grid-product": {
+    heroVariant: "modular-overview",
+    rhythm: "scan",
+    proofVariant: "tile-matrix",
+    ctaVariant: "utility-stack",
+    previewSilhouette: "tiles",
+    density: "dense",
+    emphasis: "grid",
+    mediaTreatment: "diagrammatic",
+    sectionSequence: ["hero", "proof", "features", "details", "quote"],
+  },
+  "immersive-premium": {
+    heroVariant: "control-surface",
+    rhythm: "reveal",
+    proofVariant: "reveal-cards",
+    ctaVariant: "luxury-prompt",
+    previewSilhouette: "spotlight",
+    density: "balanced",
+    emphasis: "atmosphere",
+    mediaTreatment: "ambient",
+    sectionSequence: ["hero", "proof", "features", "quote", "details"],
+  },
+  "tactile-organic": {
+    heroVariant: "soft-stack",
+    rhythm: "flow",
+    proofVariant: "soft-bullets",
+    ctaVariant: "gentle-invite",
+    previewSilhouette: "orbital",
+    density: "airy",
+    emphasis: "material",
+    mediaTreatment: "ambient",
+    sectionSequence: ["hero", "details", "features", "quote", "proof"],
+  },
+  "experimental-loud": {
+    heroVariant: "poster-stack",
+    rhythm: "collision",
+    proofVariant: "signal-cards",
+    ctaVariant: "culture-switch",
+    previewSilhouette: "collage",
+    density: "dense",
+    emphasis: "poster",
+    mediaTreatment: "collaged",
+    sectionSequence: ["hero", "proof", "features", "details", "quote"],
+  },
+};
+
+const styleRecipeOverrides: Record<
+  string,
+  Partial<Omit<StyleRecipe, "structuralSignature" | "structuralTags">>
+> = {
+  "editorial-minimalism": {
+    proofVariant: "folio-columns",
+  },
+  "premium-monochrome": {
+    heroVariant: "ornamental-frame",
+    proofVariant: "folio-columns",
+    ctaVariant: "luxury-prompt",
+    previewSilhouette: "ornament",
+    emphasis: "material",
+    mediaTreatment: "photographic",
+  },
+  "meaningful-minimalism": {
+    density: "airy",
+    mediaTreatment: "photographic",
+  },
+  "typography-first": {
+    heroVariant: "oversized-type",
+    proofVariant: "keyword-badges",
+    emphasis: "type",
+  },
+  "academia-classical": {
+    heroVariant: "scholarly-archive",
+    proofVariant: "folio-columns",
+    previewSilhouette: "ornament",
+    emphasis: "material",
+    mediaTreatment: "ornamental",
+  },
+  "art-deco-luxe": {
+    heroVariant: "ornamental-frame",
+    proofVariant: "keyword-badges",
+    ctaVariant: "luxury-prompt",
+    previewSilhouette: "ornament",
+    mediaTreatment: "ornamental",
+  },
+  "bento-grid": {
+    heroVariant: "modular-overview",
+    proofVariant: "tile-matrix",
+    density: "dense",
+  },
+  "clean-saas-gradient": {
+    heroVariant: "modular-overview",
+    proofVariant: "comparison-grid",
+    density: "balanced",
+    emphasis: "grid",
+    mediaTreatment: "photographic",
+  },
+  "professional-corporate": {
+    heroVariant: "boardroom-brief",
+    proofVariant: "comparison-grid",
+    previewSilhouette: "tiles",
+    density: "balanced",
+    emphasis: "grid",
+    mediaTreatment: "photographic",
+  },
+  "terminal-interface": {
+    heroVariant: "neon-console",
+    proofVariant: "comparison-grid",
+    previewSilhouette: "console",
+    emphasis: "type",
+  },
+  "bauhaus-geometric": {
+    heroVariant: "geometric-grid",
+    proofVariant: "tile-matrix",
+    previewSilhouette: "tiles",
+    emphasis: "grid",
+  },
+  "inclusive-accessibility-first": {
+    heroVariant: "boardroom-brief",
+    proofVariant: "comparison-grid",
+    density: "balanced",
+    emphasis: "type",
+    mediaTreatment: "photographic",
+  },
+  "glassmorphism-mature": {
+    heroVariant: "control-surface",
+    proofVariant: "metric-band",
+    previewSilhouette: "orbital",
+    emphasis: "material",
+  },
+  "dark-glow-aurora": {
+    heroVariant: "control-surface",
+    proofVariant: "reveal-cards",
+    previewSilhouette: "orbital",
+    emphasis: "atmosphere",
+  },
+  "immersive-3d-product": {
+    heroVariant: "object-spotlight",
+    proofVariant: "object-spec",
+    previewSilhouette: "spotlight",
+    emphasis: "object",
+    mediaTreatment: "rendered-object",
+  },
+  "motion-led-storytelling": {
+    heroVariant: "narrative-reveal",
+    proofVariant: "reveal-cards",
+    emphasis: "atmosphere",
+    mediaTreatment: "ambient",
+  },
+  "cyberpunk-neon": {
+    heroVariant: "neon-console",
+    proofVariant: "object-spec",
+    previewSilhouette: "console",
+    emphasis: "material",
+    mediaTreatment: "diagrammatic",
+  },
+  "web3-orange-ledger": {
+    heroVariant: "neon-console",
+    proofVariant: "metric-band",
+    previewSilhouette: "console",
+    emphasis: "object",
+    mediaTreatment: "diagrammatic",
+  },
+  "iridescent-holographic-chrome": {
+    heroVariant: "object-spotlight",
+    proofVariant: "object-spec",
+    previewSilhouette: "orbital",
+    emphasis: "material",
+    mediaTreatment: "rendered-object",
+  },
+  "claymorphism-soft-3d": {
+    heroVariant: "soft-stack",
+    proofVariant: "soft-bullets",
+    previewSilhouette: "stacked-cards",
+    emphasis: "material",
+  },
+  "organic-mesh-gradients": {
+    heroVariant: "ambient-cloud",
+    emphasis: "atmosphere",
+    mediaTreatment: "ambient",
+  },
+  "botanical-editorial": {
+    heroVariant: "earthy-asymmetry",
+    proofVariant: "editorial-notes",
+    previewSilhouette: "stacked-cards",
+    emphasis: "material",
+    mediaTreatment: "photographic",
+  },
+  "neo-brutalism": {
+    heroVariant: "poster-stack",
+    proofVariant: "signal-cards",
+    previewSilhouette: "poster",
+    emphasis: "poster",
+  },
+  "y2k-retro-futurism": {
+    heroVariant: "glossy-badge-cloud",
+    previewSilhouette: "collage",
+    emphasis: "material",
+    mediaTreatment: "ambient",
+  },
+  "anti-design": {
+    heroVariant: "poster-stack",
+    previewSilhouette: "collage",
+    emphasis: "poster",
+    mediaTreatment: "collaged",
+  },
+  "maximalism-collage": {
+    heroVariant: "poster-stack",
+    proofVariant: "comparison-grid",
+    previewSilhouette: "collage",
+    emphasis: "poster",
+    mediaTreatment: "collaged",
+  },
+  "vaporwave-dreamscape": {
+    heroVariant: "glossy-badge-cloud",
+    previewSilhouette: "collage",
+    emphasis: "material",
+    mediaTreatment: "ambient",
+  },
+  "cute-alism-kawaii-brutalism": {
+    heroVariant: "glossy-badge-cloud",
+    previewSilhouette: "stacked-cards",
+    emphasis: "material",
+    mediaTreatment: "photographic",
+  },
+  "brutalist-editorial-zine": {
+    heroVariant: "poster-stack",
+    proofVariant: "comparison-grid",
+    previewSilhouette: "collage",
+    emphasis: "poster",
+    mediaTreatment: "collaged",
+  },
+  "sketch-wireframe": {
+    heroVariant: "handmade-board",
+    previewSilhouette: "stacked-cards",
+    emphasis: "type",
+    mediaTreatment: "hand-drawn",
+  },
+};
+
+function toStructuralSignature(recipe: Omit<StyleRecipe, "structuralSignature" | "structuralTags">) {
+  return {
+    hero: recipe.heroVariant.replace(/-/g, " "),
+    rhythm: `${recipe.rhythm} · ${recipe.density}`,
+    proof: recipe.proofVariant.replace(/-/g, " "),
+  };
+}
+
+function toStructuralTags(recipe: Omit<StyleRecipe, "structuralSignature" | "structuralTags">) {
+  return [
+    recipe.heroVariant,
+    recipe.rhythm,
+    recipe.proofVariant,
+    recipe.ctaVariant,
+    recipe.previewSilhouette,
+    recipe.density,
+    recipe.emphasis,
+    recipe.mediaTreatment,
+    ...recipe.sectionSequence,
+  ].map((item) => item.replace(/-/g, " "));
+}
+
+function assertRecipe(style: StyleSeed, recipe: Omit<StyleRecipe, "structuralSignature" | "structuralTags">) {
+  const constraints = styleFamilies[style.family].constraints;
+
+  if (!constraints.heroVariants.includes(recipe.heroVariant)) {
+    throw new Error(`Invalid heroVariant \"${recipe.heroVariant}\" for ${style.slug}`);
+  }
+
+  if (!constraints.rhythms.includes(recipe.rhythm)) {
+    throw new Error(`Invalid rhythm \"${recipe.rhythm}\" for ${style.slug}`);
+  }
+
+  if (!constraints.proofVariants.includes(recipe.proofVariant)) {
+    throw new Error(`Invalid proofVariant \"${recipe.proofVariant}\" for ${style.slug}`);
+  }
+
+  if (!constraints.ctaVariants.includes(recipe.ctaVariant)) {
+    throw new Error(`Invalid ctaVariant \"${recipe.ctaVariant}\" for ${style.slug}`);
+  }
+
+  if (!constraints.previewSilhouettes.includes(recipe.previewSilhouette)) {
+    throw new Error(`Invalid previewSilhouette \"${recipe.previewSilhouette}\" for ${style.slug}`);
+  }
+
+  if (!constraints.densityModes.includes(recipe.density)) {
+    throw new Error(`Invalid density \"${recipe.density}\" for ${style.slug}`);
+  }
+
+  if (!constraints.emphasisModes.includes(recipe.emphasis)) {
+    throw new Error(`Invalid emphasis \"${recipe.emphasis}\" for ${style.slug}`);
+  }
+
+  if (!constraints.mediaTreatments.includes(recipe.mediaTreatment)) {
+    throw new Error(`Invalid mediaTreatment \"${recipe.mediaTreatment}\" for ${style.slug}`);
+  }
+
+  if (recipe.sectionSequence.length < 3 || recipe.sectionSequence[0] !== "hero") {
+    throw new Error(`Invalid sectionSequence for ${style.slug}`);
+  }
+}
+
+function buildRecipe(style: StyleSeed): StyleRecipe {
+  const recipe = {
+    ...familyDefaults[style.family],
+    ...styleRecipeOverrides[style.slug],
+  };
+
+  assertRecipe(style, recipe);
+
+  return {
+    ...recipe,
+    structuralSignature: toStructuralSignature(recipe),
+    structuralTags: toStructuralTags(recipe),
+  };
+}
+
+function assertUniqueSlugs(items: StyleSeed[]) {
+  const seen = new Set<string>();
+
+  for (const item of items) {
+    if (seen.has(item.slug)) {
+      throw new Error(`Duplicate style slug: ${item.slug}`);
+    }
+
+    seen.add(item.slug);
+  }
+}
+
+assertUniqueSlugs(themeSeeds);
+
+export const themes: StyleDefinition[] = themeSeeds.map((style) => ({
+  ...style,
+  recipe: buildRecipe(style),
+}));
 
 export const styles = themes;
 export const demoStyles = styles.filter((style) => style.demoAvailable !== false);

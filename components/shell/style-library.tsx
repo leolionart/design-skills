@@ -30,6 +30,10 @@ function getSearchableText(style: ThemeDefinition) {
       ...style.avoidList,
       ...style.previewBullets,
       ...style.keywords,
+      ...style.recipe.structuralTags,
+      style.recipe.structuralSignature.hero,
+      style.recipe.structuralSignature.rhythm,
+      style.recipe.structuralSignature.proof,
       intelligence.thesis,
       ...intelligence.grammar,
       ...intelligence.compare.map((item) => item.reason),
@@ -40,13 +44,13 @@ function getSearchableText(style: ThemeDefinition) {
 const quickKeywords = [
   "glass",
   "editorial",
+  "manifesto",
   "bento",
+  "dense grid",
   "dark",
-  "3d",
-  "saas",
+  "object spotlight",
   "typography",
-  "motion",
-  "cyberpunk",
+  "poster",
   "terminal",
   "vaporwave",
   "art deco",
@@ -69,7 +73,12 @@ export function StyleLibrary({ styles }: { styles: ThemeDefinition[] }) {
       familyOrder
         .map((family) => ({
           family,
-          styles: filteredStyles.filter((style) => style.family === family),
+          styles: filteredStyles
+            .filter((style) => style.family === family)
+            .sort((left, right) =>
+              left.recipe.previewSilhouette.localeCompare(right.recipe.previewSilhouette) ||
+              left.modeLabel.localeCompare(right.modeLabel),
+            ),
         }))
         .filter((group) => group.styles.length > 0),
     [filteredStyles],
@@ -83,13 +92,13 @@ export function StyleLibrary({ styles }: { styles: ThemeDefinition[] }) {
             Search the library
           </p>
           <label htmlFor="style-search" className="mt-5 block text-sm font-semibold text-[var(--theme-text)]">
-            Search by keyword, family, mood, or use case
+            Search by keyword, family, mood, or structure
           </label>
           <input
             id="style-search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try: glass, luxury, saas, dark, 3d..."
+            placeholder="Try: manifesto, poster, terminal, object spotlight..."
             className="mt-3 w-full rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-strong)] px-4 py-3 text-sm text-[var(--theme-text)] outline-none transition focus:border-[var(--theme-accent)] focus:ring-2 focus:ring-[var(--theme-ring)]"
           />
 
@@ -121,9 +130,7 @@ export function StyleLibrary({ styles }: { styles: ThemeDefinition[] }) {
               {filteredStyles.length}
             </p>
             <p className="mt-2 text-sm leading-6 text-[var(--theme-muted)]">
-              {normalizedQuery
-                ? `Matching keyword “${query}”.`
-                : "Showing the full style library."}
+              {normalizedQuery ? `Matching keyword “${query}”.` : "Showing the full style library."}
             </p>
           </div>
 
@@ -160,7 +167,7 @@ export function StyleLibrary({ styles }: { styles: ThemeDefinition[] }) {
               No matching style found.
             </h3>
             <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--theme-muted)]">
-              Try keywords like glass, bento, luxury, motion, editorial, or 3d to widen the results.
+              Try keywords like glass, manifesto, poster, terminal, object spotlight, or art deco.
             </p>
           </Surface>
         ) : (
