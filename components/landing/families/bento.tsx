@@ -24,9 +24,9 @@ function BentoTile({
   };
 
   const variantClasses = {
-    default: "bg-[var(--theme-surface-strong)]",
-    accent: "bg-[var(--theme-accent)] text-[var(--theme-accent-contrast)]",
-    gradient: "bg-gradient-to-br from-[var(--theme-accent)] to-[var(--theme-accent-2)] text-white",
+    default: "bg-[var(--theme-surface-strong)] border border-[var(--theme-border)] shadow-[var(--theme-shadow)]",
+    accent: "bg-[var(--theme-accent)] text-[var(--theme-accent-contrast)] border border-transparent shadow-lg shadow-[var(--theme-accent)]/20",
+    gradient: "bg-gradient-to-br from-[var(--theme-accent)] to-[var(--theme-accent-2)] text-white shadow-lg shadow-[var(--theme-accent)]/20",
     outline: "bg-transparent border-2 border-[var(--theme-border)]",
   };
 
@@ -34,7 +34,6 @@ function BentoTile({
     <div
       className={`
         rounded-[var(--theme-radius)] p-5 sm:p-6
-        shadow-[var(--theme-shadow)]
         ${sizeClasses[size]}
         ${variantClasses[variant]}
         ${className}
@@ -108,13 +107,6 @@ export function BentoLanding({ theme }: { theme: ThemeDefinition }) {
                   className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
                 >
                   Back to gallery
-                </Button>
-                <Button
-                  href="/styles/clean-saas-gradient"
-                  variant="ghost"
-                  className="text-white/90 hover:bg-white/10 hover:text-white"
-                >
-                  Compare SaaS
                 </Button>
               </div>
             </BentoTile>

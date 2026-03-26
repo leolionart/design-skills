@@ -22,8 +22,8 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["off-axis hero", "hierarchy swings", "dimensional proof blocks"],
     compare: [
       {
-        slug: "clean-saas-gradient",
-        reason: "Choose this when the brand needs founder energy; choose clean SaaS when conversion clarity must dominate.",
+        slug: "professional-corporate",
+        reason: "Choose this when the brand needs founder energy; choose professional corporate when conversion clarity must dominate.",
       },
     ],
   },
@@ -66,8 +66,8 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["variable tiles", "scan-first density", "modular storytelling"],
     compare: [
       {
-        slug: "clean-saas-gradient",
-        reason: "Bento uses layout rhythm as the differentiator; clean SaaS keeps a safer, more standard marketing cadence.",
+        slug: "professional-corporate",
+        reason: "Bento uses layout rhythm as the differentiator; professional corporate keeps a safer, more standard marketing cadence.",
       },
     ],
   },
@@ -123,17 +123,6 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
       {
         slug: "brutalist-editorial-zine",
         reason: "Anti-design is broader rule-breaking; zine style is more specifically publication- and collage-coded.",
-      },
-    ],
-  },
-  "clean-saas-gradient": {
-    thesis:
-      "A conversion-first SaaS baseline that feels polished and trustworthy without asking the user to decode a strong art direction.",
-    grammar: ["clean modules", "soft gradients", "rounded trust cues"],
-    compare: [
-      {
-        slug: "professional-corporate",
-        reason: "Clean SaaS is startup-polished and friendlier; professional is more sober and buyer-room ready.",
       },
     ],
   },
@@ -225,17 +214,6 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
       },
     ],
   },
-  "inclusive-accessibility-first": {
-    thesis:
-      "An accessible system where contrast, readable sizing, and generous controls are treated as the brand voice itself.",
-    grammar: ["high contrast", "large controls", "clarity-led hierarchy"],
-    compare: [
-      {
-        slug: "professional-corporate",
-        reason: "Professional aims for business trust; accessibility-first makes inclusive readability the visible design choice.",
-      },
-    ],
-  },
   "academia-classical": {
     thesis:
       "A scholarly editorial mood that borrows from libraries, parchment, and institutional gravitas to create authority.",
@@ -275,8 +253,8 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
     grammar: ["controlled accents", "crisp cards", "executive clarity"],
     compare: [
       {
-        slug: "clean-saas-gradient",
-        reason: "Professional is more sober and enterprise-facing; clean SaaS is lighter and more startup-marketing friendly.",
+        slug: "terminal-interface",
+        reason: "Professional is business-facing and polished; terminal interface is more operational and engineering-coded.",
       },
     ],
   },
@@ -362,4 +340,3 @@ export const styleIntelligence: Record<string, StyleIntelligence> = {
 export function getStyleIntelligence(slug: string): StyleIntelligence {
   return styleIntelligence[slug] ?? fallbackStyleIntelligence;
 }
-

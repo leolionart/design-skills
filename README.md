@@ -38,7 +38,6 @@ All 20 styles now have live demo pages:
 - `immersive-3d-product`
 - `y2k-retro-futurism`
 - `anti-design`
-- `clean-saas-gradient`
 - `typography-first`
 - `organic-mesh-gradients`
 - `premium-monochrome`
@@ -47,7 +46,6 @@ All 20 styles now have live demo pages:
 - `meaningful-minimalism`
 - `cute-alism-kawaii-brutalism`
 - `brutalist-editorial-zine`
-- `inclusive-accessibility-first`
 
 ## Renderer families
 

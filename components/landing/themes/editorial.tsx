@@ -31,8 +31,8 @@ export function EditorialLanding({ theme }: { theme: ThemeDefinition }) {
                 <Button href="/" variant="secondary">
                   Return to gallery
                 </Button>
-                <Button href="/styles/clean-saas-gradient" variant="ghost">
-                  Compare clean SaaS
+                <Button href="/styles/professional-corporate" variant="ghost">
+                  Compare professional
                 </Button>
               </div>
             </div>
