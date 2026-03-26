@@ -2,6 +2,7 @@ import {
   DemoStyleSidebar,
   DemoStyleSidebarDrawer,
 } from "@/components/landing/demo-style-sidebar";
+import { BauhausLanding } from "@/components/landing/families/bauhaus";
 import { familyRenderers } from "@/components/landing/families/registry";
 import { CopyPromptButton } from "@/components/shell/copy-prompt-button";
 import { StyleIntelligencePanel } from "@/components/shell/style-intelligence-panel";
@@ -11,8 +12,13 @@ import { Surface } from "@/components/ui/surface";
 import { styleFamilies } from "@/lib/style-families";
 import { demoStyles, type ThemeDefinition } from "@/lib/themes";
 
+// Special renderers for specific styles that need unique treatment
+const specialRenderers: Record<string, typeof familyRenderers[keyof typeof familyRenderers]> = {
+  "bauhaus-geometric": BauhausLanding,
+};
+
 export function LandingPageRenderer({ theme }: { theme: ThemeDefinition }) {
-  const Renderer = familyRenderers[theme.family];
+  const Renderer = specialRenderers[theme.slug] ?? familyRenderers[theme.family];
   const family = styleFamilies[theme.family];
   const demoStyleLinks = demoStyles.map((style) => ({
     slug: style.slug,
