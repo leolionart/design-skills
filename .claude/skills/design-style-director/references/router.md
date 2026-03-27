@@ -30,3 +30,6 @@ Culture-forward disruption with deliberate tension, high contrast, and anti-temp
 
 ## Style-specific guardrails
 - `terminal` is mapped to immersive-premium for family routing, but should keep hard-edged command-line controls and avoid pill-shaped CTAs.
+- `skeuomorphic` should read as raised keycaps over a recessed base (matte panels, tighter radii, safety-orange utility accents), not soft pastel blobs.
+- `skeuomorphism` should use refined raised controls over a soft base (bevel/specular detail, controlled shadows), not toy-like inflated clay surfaces.
+- For both skeuo styles, apply the raised-key effect to primary cards and CTA buttons, not only to micro chips.

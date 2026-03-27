@@ -813,20 +813,19 @@ const themeSeeds: StyleSeed[] = [
     featured: false,
     demoAvailable: true,
     vars: vars({
-      "--theme-bg": "hsl(307 75% 95%)",
-      "--theme-bg-alt": "hsl(345 68% 91%)",
-      "--theme-surface": "hsl(0 0% 100% / 0.72)",
-      "--theme-surface-strong": "hsl(0 0% 100% / 0.92)",
-      "--theme-text": "hsl(345 24% 18%)",
-      "--theme-muted": "hsl(345 14% 43%)",
-      "--theme-border": "hsl(345 34% 62% / 0.3)",
-      "--theme-accent": "hsl(137 76% 58%)",
-      "--theme-accent-2": "hsl(307 72% 62%)",
-      "--theme-accent-contrast": "hsl(0 0% 100%)",
-      "--theme-ring": "hsl(137 86% 56% / 0.28)",
-      "--theme-shadow": "0 24px 55px rgba(89, 93, 142, 0.14)",
-      "--theme-grid": "hsl(345 32% 54% / 0.08)",
-      "--theme-radius": "30px",
+      "--theme-bg": "hsl(214 12% 16%)",
+      "--theme-bg-alt": "hsl(214 10% 22%)",
+      "--theme-surface": "hsl(214 10% 24% / 0.92)",
+      "--theme-surface-strong": "hsl(214 9% 30% / 0.98)",
+      "--theme-text": "hsl(210 18% 92%)",
+      "--theme-muted": "hsl(210 10% 70%)",
+      "--theme-border": "hsl(212 10% 54% / 0.56)",
+      "--theme-accent": "hsl(24 92% 56%)",
+      "--theme-accent-2": "hsl(38 92% 62%)",
+      "--theme-accent-contrast": "hsl(214 12% 10%)",
+      "--theme-ring": "hsl(24 92% 56% / 0.34)",
+      "--theme-shadow": "0 20px 36px rgba(0, 0, 0, 0.42)",
+      "--theme-grid": "hsl(214 10% 62% / 0.12)",
     }),
   },
   {
@@ -1957,20 +1956,19 @@ const themeSeeds: StyleSeed[] = [
     featured: false,
     demoAvailable: true,
     vars: vars({
-      "--theme-bg": "hsl(98 75% 95%)",
-      "--theme-bg-alt": "hsl(136 68% 91%)",
-      "--theme-surface": "hsl(0 0% 100% / 0.72)",
-      "--theme-surface-strong": "hsl(0 0% 100% / 0.92)",
-      "--theme-text": "hsl(136 24% 18%)",
-      "--theme-muted": "hsl(136 14% 43%)",
-      "--theme-border": "hsl(136 34% 62% / 0.3)",
-      "--theme-accent": "hsl(288 76% 58%)",
-      "--theme-accent-2": "hsl(98 72% 62%)",
+      "--theme-bg": "hsl(36 18% 90%)",
+      "--theme-bg-alt": "hsl(32 14% 84%)",
+      "--theme-surface": "hsl(0 0% 98% / 0.94)",
+      "--theme-surface-strong": "hsl(0 0% 100% / 0.98)",
+      "--theme-text": "hsl(220 12% 22%)",
+      "--theme-muted": "hsl(220 8% 42%)",
+      "--theme-border": "hsl(28 10% 58% / 0.34)",
+      "--theme-accent": "hsl(214 54% 46%)",
+      "--theme-accent-2": "hsl(28 36% 50%)",
       "--theme-accent-contrast": "hsl(0 0% 100%)",
-      "--theme-ring": "hsl(288 86% 56% / 0.28)",
-      "--theme-shadow": "0 24px 55px rgba(89, 93, 142, 0.14)",
-      "--theme-grid": "hsl(136 32% 54% / 0.08)",
-      "--theme-radius": "30px",
+      "--theme-ring": "hsl(214 54% 46% / 0.3)",
+      "--theme-shadow": "0 22px 40px rgba(61, 67, 86, 0.16)",
+      "--theme-grid": "hsl(220 10% 40% / 0.08)",
     }),
   },
   {
@@ -3867,6 +3865,15 @@ const styleRecipeOverrides: Record<
     emphasis: "type",
     mediaTreatment: "hand-drawn",
   },
+  "skeuomorphic": {
+    heroVariant: "soft-stack",
+    proofVariant: "keyword-badges",
+    ctaVariant: "quiet-links",
+    previewSilhouette: "stacked-cards",
+    density: "balanced",
+    emphasis: "material",
+    mediaTreatment: "photographic",
+  },
   "terminal": {
     heroVariant: "neon-console",
     proofVariant: "object-spec",
@@ -3966,6 +3973,15 @@ const styleRecipeOverrides: Record<
     previewSilhouette: "orbital",
     emphasis: "atmosphere",
     mediaTreatment: "ambient",
+  },
+  "skeuomorphism": {
+    heroVariant: "ambient-cloud",
+    proofVariant: "soft-bullets",
+    ctaVariant: "gentle-invite",
+    previewSilhouette: "stacked-cards",
+    density: "balanced",
+    emphasis: "material",
+    mediaTreatment: "photographic",
   },
   "isometric-design": {
     heroVariant: "geometric-grid",
@@ -4068,19 +4084,33 @@ function deriveStyleVariables(
     recipe.emphasis === "poster" ||
     recipe.mediaTreatment === "collaged";
   const terminalSignal = style.slug === "terminal";
+  const industrialSkeuoSignal = style.slug === "skeuomorphic";
+  const craftedSkeuoSignal = style.slug === "skeuomorphism";
 
   const hash = styleHash(style.slug);
   const radiusJitter = hash % 5;
   const surfaceRadius = terminalSignal
     ? "8px"
+    : industrialSkeuoSignal
+      ? "14px"
+      : craftedSkeuoSignal
+        ? "22px"
     : `${previewRadiusBySilhouette[recipe.previewSilhouette] + radiusJitter}px`;
   const shapeRadius = terminalSignal
     ? "4px"
+    : industrialSkeuoSignal
+      ? "8px"
+      : craftedSkeuoSignal
+        ? "14px"
     : `${Math.max(8, previewRadiusBySilhouette[recipe.previewSilhouette] - 4 + (hash % 4))}px`;
 
   const baseButtonRadius = buttonRadiusByCta[recipe.ctaVariant];
   const buttonRadius = terminalSignal
     ? "4px"
+    : industrialSkeuoSignal
+      ? "10px"
+      : craftedSkeuoSignal
+        ? "16px"
     : baseButtonRadius >= 999
       ? "999px"
       : `${Math.max(8, baseButtonRadius + (hash % 3) * 2)}px`;
@@ -4092,6 +4122,10 @@ function deriveStyleVariables(
 
   const buttonLetterSpacing = terminalSignal
     ? "0.04em"
+    : industrialSkeuoSignal
+      ? "0.03em"
+      : craftedSkeuoSignal
+        ? "0.02em"
     : uppercaseButton
       ? `${((4 + (hash % 4)) / 100).toFixed(2)}em`
       : `${((1 + (hash % 3)) / 100).toFixed(2)}em`;
@@ -4099,6 +4133,8 @@ function deriveStyleVariables(
   const buttonTextTransform = terminalSignal ? "none" : uppercaseButton ? "uppercase" : "none";
   const buttonFont = terminalSignal
     ? "var(--theme-font-mono)"
+    : industrialSkeuoSignal || craftedSkeuoSignal
+      ? "var(--theme-font-body)"
     : monoSignal
     ? "var(--theme-font-mono)"
     : editorialSignal || recipe.ctaVariant === "luxury-prompt"
@@ -4106,6 +4142,10 @@ function deriveStyleVariables(
       : "var(--theme-font-body)";
   const buttonFontWeight = terminalSignal
     ? "600"
+    : industrialSkeuoSignal
+      ? "700"
+      : craftedSkeuoSignal
+        ? "600"
     : recipe.ctaVariant === "assertive-dual" || recipe.ctaVariant === "culture-switch"
       ? "700"
       : recipe.ctaVariant === "quiet-links"
@@ -4118,14 +4158,25 @@ function deriveStyleVariables(
 
   const strongOutline =
     terminalSignal ||
+    industrialSkeuoSignal ||
     loudSignal ||
     recipe.previewSilhouette === "console" ||
     recipe.mediaTreatment === "diagrammatic" ||
     recipe.emphasis === "grid";
 
-  const outlineWidth = terminalSignal ? "1px" : strongOutline ? "2px" : "1px";
+  const outlineWidth = terminalSignal
+    ? "1px"
+    : industrialSkeuoSignal
+      ? "2px"
+      : craftedSkeuoSignal
+        ? "1px"
+        : strongOutline
+          ? "2px"
+          : "1px";
   const displayFont = terminalSignal
     ? "var(--theme-font-mono)"
+    : industrialSkeuoSignal || craftedSkeuoSignal
+      ? "var(--theme-font-body)"
     : monoSignal
     ? "var(--theme-font-mono)"
     : editorialSignal || recipe.mediaTreatment === "ornamental"
@@ -4139,6 +4190,10 @@ function deriveStyleVariables(
 
   const buttonShadow = terminalSignal
     ? "none"
+    : industrialSkeuoSignal
+      ? "inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 6px 16px rgba(0, 0, 0, 0.34)"
+      : craftedSkeuoSignal
+        ? "inset 0 1px 1px rgba(255, 255, 255, 0.65), 0 10px 18px rgba(68, 74, 92, 0.2)"
     : recipe.ctaVariant === "quiet-links"
       ? "none"
       : recipe.emphasis === "poster"

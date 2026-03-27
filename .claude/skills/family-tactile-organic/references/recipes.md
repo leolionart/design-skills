@@ -202,7 +202,8 @@ Hardware close-ups, control panels, and lighting that emphasizes materiality.
 - Maintain the stated imagery mode and avoid list to prevent drift into nearby styles.
 - Keep `skeuomorphic` anchored in matte surfaces, mechanical detailing, and weighty tactile depth; avoid drifting toward `neumorphism` (soft monochrome surfaces, subtle extrusions, and friendly rounded forms with rounded controls, inset and raised surfaces, and soft directional light).
 - Keep `skeuomorphic` anchored in matte surfaces, mechanical detailing, and weighty tactile depth; avoid drifting toward `skeuomorphism` (material surfaces, shadowing, and tactile depth with icons and panels with visible material finish, reflected highlights, and subtle bevel or emboss cues).
-
+- Build a recessed base plus raised keycap controls (hardware-like matte shells, tighter radii, practical orange utility accents); avoid bubbly rounded consumer softness.
+- Apply the raised-key depth model to major cards and CTA buttons as the primary visual cue, not only to small chips or tags.
 - Use preview cues and keywords as guardrails when expanding prompts or generating variants.
 
 ### `glassmorphism-mature`
@@ -395,7 +396,8 @@ Icons and panels with visible material finish, reflected highlights, and subtle 
 - Maintain the stated imagery mode and avoid list to prevent drift into nearby styles.
 - Keep `skeuomorphism` anchored in material surfaces, shadowing, and tactile depth; avoid drifting toward `skeuomorphic` (matte surfaces, mechanical detailing, and weighty tactile depth with hardware close-ups, control panels, and lighting that emphasizes materiality).
 - Keep `skeuomorphism` anchored in material surfaces, shadowing, and tactile depth; avoid drifting toward `subtle-colored-shadows` (tinted shadow and restrained depth with cards, chips, or objects with faint pink, violet, or blue shadow tints on clean grounds).
-
+- Build a soft base layer with raised crafted controls (subtle bevel/specular cues and restrained depth); avoid industrial panel language or toy-like puffiness.
+- Apply the raised-key depth model to major cards and CTA buttons as the primary visual cue, not only to small chips or tags.
 - Use preview cues and keywords as guardrails when expanding prompts or generating variants.
 
 ### `subtle-colored-shadows`
