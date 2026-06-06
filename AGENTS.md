@@ -27,3 +27,15 @@ When a user gives feedback about a demo style (e.g. "style X chưa đúng"), eve
 - Do not ship style visual changes without matching `.claude/skills` updates.
 - Do not remove a style slug from `lib/themes.ts` without removing/updating related exemplar references in `.claude/skills`.
 - Keep wording focused on differentiating signals (layout grammar, surface language, hierarchy rhythm), not only colors/fonts.
+
+## Release notes on push
+
+- Before pushing user-facing, deployable, or behavior-changing work, include a
+  release notes/changelog update in the same commit range whenever practical.
+- This repo uses the shared pre-push hook at
+  `/Volumes/DATA/Coding Projects/.codex-tools/git-hooks`. If pushed commits do
+  not include release notes, the hook auto-generates them, commits `Add release
+  notes`, and pushes the updated branch.
+- Accepted paths: `CHANGELOG.md`, `Changelog.md`, `changelog.md`,
+  `RELEASE_NOTES.md`, `RELEASE-NOTES.md`, `docs/releases/*.md`,
+  `docs/release-notes/*.md`.
